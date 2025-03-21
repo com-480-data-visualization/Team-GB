@@ -2,7 +2,7 @@
 
 **Due to 21st March, 5pm**
 
-### Our Dataset ♟️
+### Our Dataset: 20000+ Chess Games ♟️
 The dataset we are using is from  [Kaggle](https://www.kaggle.com/datasets) website, focusing on chess statistics to analyze user game data. It is a set of just over 20,000 games collected from a selection of users on the site Lichess.org
 
 
