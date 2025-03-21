@@ -11,6 +11,10 @@ Link to the dataset:
 
 
 ### Problematic  
+> Frame the general topic of your visualization and the main axis that you want to develop.
+> - What am I trying to show with my visualization?
+> - Think of an overview for the project, your motivation, and the target audience.
+
 
 - **Our Motivation:**  
   Our project presents chess through a visual and interactive lens, making game analysis and trend exploration accessible to all—curious minds, beginners, and experienced players alike.  
