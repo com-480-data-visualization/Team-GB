@@ -3,10 +3,10 @@
 **Due to 21st March, 5pm**
 
 ### Dataset
-The dataset we are using is from  [Kaggle](https://www.kaggle.com/datasets) website.
+The dataset we are using is from  [Kaggle](https://www.kaggle.com/datasets) website. We will be focusing on chess.com statistics
 
 Link to the dataset:
-- 
+- [Kaggle](https://www.kaggle.com/datasets/adityajha1504/chesscom-user-games-60000-games)
 
 
 ### Problematic
