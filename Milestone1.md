@@ -56,14 +56,20 @@ The Lichess dataset has been widely used to train AI models, developing algorith
 One clear source of inspiration is Lichess, which offers an interactive chessboard for online games. Our project aims to take this further by using the Lichess dataset for an engaging and educational chess analysis, enabling users to better understand the game and access data on game trends. The goal is to provide a modern, visually appealing interface that draws attention through innovative design elements, such as reimagined chessboard grids, unique color palettes, and redefined piece shapes. For example, we could use animated transitions to show the progression of a game, allowing users to explore sequences of moves interactively.
 
 <p align="center">
+    <img src="images/form-input.png" width="45%"/>
+</p>
+<p align="center">
+    <img src="images/dashboard.png" width="55%"/>
+</p>
+<p align="center">
     <img src="images/7573642-kv-01.jpg" width="45%"/>
     <img src="images/7739508-kv-02.jpg" width="45%"/>
 </p>
-
+<!-- 
 <p align="center">
     <img src="images/piece.jpeg" width="45%"/>
     <img src="images/chess-poster.jpg" width="45%"/>
-</p>
+</p> -->
 
 <p align="center">
     <img src="images/chess_set.jpg" width="45%"/>
