@@ -2,7 +2,7 @@
 
 **Due to 21st March, 5pm**
 
-### Dataset
+### Our Dataset ♟️
 The dataset we are using is from  [Kaggle](https://www.kaggle.com/datasets) website, focusing on chess statistics to analyze user game data. It is a set of just over 20,000 games collected from a selection of users on the site Lichess.org
 
 
@@ -10,7 +10,7 @@ Link to the dataset:
 - [Chess Game Dataset (Lichess)](https://www.kaggle.com/datasets/datasnaek/chess)
 
 
-### Problematic  
+### Problematic 🔍
 
 - **Our Motivation:**  
   Our project presents chess through a visual and interactive lens, making game analysis and trend exploration accessible to all—curious minds, beginners, and experienced players alike.  
@@ -33,7 +33,7 @@ Link to the dataset:
   - Experienced players seeking data-driven insights  
   - Anyone interested in the intersection of chess and data visualization  
 
-### Exploratory Data Analysis
+### Exploratory Data Analysis 📈
 
 We did a first analysis of our dataset in `Milestone1.ipynb` in order to get some insights about the data. In this document, we present the most important information from our dataset so that the reader can get a good idea of its extent and richness. 
 
