@@ -35,7 +35,7 @@ Link to the dataset:
 
 ### Exploratory Data Analysis
 
-We did a first analysis of our dataset in `Milestone1.ipynb` in order to get some insights about the data. In this document, we present the most important information from our dataset so that the reader can get a good idea of the extent and richness of our data. 
+We did a first analysis of our dataset in `Milestone1.ipynb` in order to get some insights about the data. In this document, we present the most important information from our dataset so that the reader can get a good idea of its extent and richness. 
 
 ### Related work
 
