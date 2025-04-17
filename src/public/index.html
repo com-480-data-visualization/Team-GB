@@ -4,33 +4,445 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>TeamGB - Lichess</title>
+    <title>TeamGB - Lichess Data Visualization</title>
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="/images/favicon/favicon-96x96.png" sizes="96x96">
-    <link rel="icon" type="image/svg+xml" href="/images/favicon/favicon.svg">
-    <link rel="shortcut icon" href="/images/favicon/favicon.ico">
-    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
-    <link rel="manifest" href="/images/favicon/site.webmanifest">
+    <link rel="icon" type="image/png" href="images/favicon/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/svg+xml" href="images/favicon/favicon.svg">
+    <link rel="shortcut icon" href="images/favicon/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-touch-icon.png">
+    <link rel="manifest" href="images/favicon/site.webmanifest">
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- CSS -->
-    <link rel="stylesheet" href="styles/ac-gn-header.css">
     <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles/style.css">
     <!-- JS -->
-    <script src="scripts/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/plotly.js-dist@2.24.1/plotly.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chess.js@1.0.0-beta.6/dist/chess.min.js"></script>
 </head>
-<body>
-    <header class="header-gradient py-12 px-4 md:px-8">
+<body class="bg-gray-50 font-sans">
+    <!-- Header Nav -->
+    <nav class="bg-white shadow-md">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center">
+                <img src="images/logo.svg" alt="Chess Insights Logo" class="h-10 mr-3">
+                <span class="text-xl font-bold">Chess Insights</span>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="#dashboard" class="nav-link">Dashboard</a>
+                <a href="#player-stats" class="nav-link">Player Stats</a>
+                <a href="#game-analysis" class="nav-link">Game Analysis</a>
+                <a href="#opening-explorer" class="nav-link">Opening Explorer</a>
+                <a href="#about" class="nav-link">About</a>
+            </div>
+            <button class="md:hidden" id="mobile-menu-button">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+        <!-- Mobile nav -->
+        <div class="md:hidden hidden" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="#dashboard" class="mobile-nav-link">Dashboard</a>
+                <a href="#player-stats" class="mobile-nav-link">Player Stats</a>
+                <a href="#game-analysis" class="mobile-nav-link">Game Analysis</a>
+                <a href="#opening-explorer" class="mobile-nav-link">Opening Explorer</a>
+                <a href="#about" class="mobile-nav-link">About</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Title -->
+    <header class="py-12 px-4 md:px-8 bg-white">
         <div class="container mx-auto text-center">
-            <h1 class="text-4xl md:text-5xl font-bold mb-4">TeamGB - Lichess</h1>
-            <p class="text-xl md:text-2xl max-w-3xl mx-auto">
-                How chess data can be structured and visualized to provide insightful analysis for both casual enthusiasts and advanced players.
-            </p>
+          <h1 class="text-4xl md:text-5xl font-bold mb-4 text-black">Chess Data Visualization</h1>
+          <p class="text-xl md:text-2xl max-w-3xl mx-auto mb-8 text-black">
+            Exploring 20,000+ Lichess games through interactive visualizations and insightful analysis
+          </p>
+          <div class="flex justify-center space-x-4">
+            <a href="#dashboard" class="bg-white text-black border border-gray-300 hover:text-blue-500 hover:border-blue-500 px-6 py-3 rounded-lg font-medium transition">Explore Dashboard</a>
+            <a href="#about" class="bg-transparent border-2 border-black text-black hover:text-blue-500 hover:border-blue-500 px-6 py-3 rounded-lg font-medium transition">Learn More</a>
+          </div>
         </div>
     </header>
+
+    <!-- Intro Section -->
+    <section id="about" class="py-16 px-4">
+        <div class="container mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4">About The Project</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                    Our project presents chess through a visual and interactive lens, making game analysis and trend exploration 
+                    accessible to all—curious minds, beginners, and experienced players alike.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h3 class="text-2xl font-semibold mb-4">Our Motivation</h3>
+                    <p class="text-gray-700 mb-4">
+                        At first glance, chess appears to be a simple 64-square board with 32 pieces. However, beneath this 
+                        simplicity lies immense strategic depth. Driven by our passion for the game, we aim to highlight key 
+                        patterns and strategies through data-driven visualizations and simulations.
+                    </p>
+                    <h3 class="text-2xl font-semibold mb-4">Target Audience</h3>
+                    <ul class="list-disc pl-5 text-gray-700">
+                        <li>Chess enthusiasts of all levels</li>
+                        <li>Beginners looking for an interactive learning experience</li>
+                        <li>Experienced players seeking data-driven insights</li>
+                        <li>Anyone interested in the intersection of chess and data visualization</li>
+                    </ul>
+                </div>
+                <div>
+                    <img src="images/chess_set.jpg" alt="Chess Set" class="rounded-lg shadow-xl">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard Section -->
+    <section id="dashboard" class="py-16 px-4 bg-gray-100">
+        <div class="container mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4">Interactive Dashboard</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                    Explore key insights from our dataset of 20,000+ chess games from Lichess.org
+                </p>
+            </div>
+            <!-- Stats Cards -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-xl font-semibold mb-4">Game Statistics</h3>
+                    <div id="game-stats-chart" class="h-64"></div>
+                    <p class="text-gray-600 mt-4">Distribution of games by result and time control</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-xl font-semibold mb-4">Opening Popularity</h3>
+                    <div id="opening-chart" class="h-64"></div>
+                    <p class="text-gray-600 mt-4">Most popular chess openings across all games</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-xl font-semibold mb-4">Rating Distribution</h3>
+                    <div id="rating-distribution" class="h-64"></div>
+                    <p class="text-gray-600 mt-4">Player ratings distribution across all games</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Player Stats Section -->
+    <section id="player-stats" class="py-16 px-4">
+        <div class="container mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4">Player Statistics</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                    This section will enable the analysis of individual player performance and patterns
+                </p>
+            </div>
+            
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+                <h3 class="text-xl font-semibold mb-6">Player Lookup</h3>
+                <div class="flex flex-col md:flex-row gap-4">
+                    <div class="flex-grow">
+                        <input type="text" id="player-search" placeholder="Enter Lichess username" 
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    </div>
+                    <button id="search-button" class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-700 transition">
+                        Search
+                    </button>
+                </div>
+            </div>
+            
+            <div id="player-results" class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Player profile card - @TOODO populate with data (js) -->
+                <div class="bg-white rounded-lg shadow-md p-6 hidden" id="player-profile">
+                    <h3 class="text-xl font-semibold mb-4">Player Profile</h3>
+                    <div id="player-info" class="mb-4"></div>
+                    <div id="win-rate-chart" class="h-64"></div>
+                </div>
+                
+                <!-- Player openings card -->
+                <div class="bg-white rounded-lg shadow-md p-6 hidden" id="player-openings">
+                    <h3 class="text-xl font-semibold mb-4">Favorite Openings</h3>
+                    <div id="openings-chart" class="h-64"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Game Analysis Section -->
+    <section id="game-analysis" class="py-16 px-4 bg-gray-100">
+        <div class="container mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4">Interactive Game Analysis</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                    Replay and analyze chess games with our interactive board
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Game selector -->
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-xl font-semibold mb-4">Select Game</h3>
+                    <div class="mb-4">
+                        <label for="game-search" class="block text-gray-700 mb-2">Search by players or opening:</label>
+                        <input type="text" id="game-search" placeholder="e.g., Carlsen, Sicilian" 
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    </div>
+                    <div class="mb-4">
+                        <label for="game-filter" class="block text-gray-700 mb-2">Filter by:</label>
+                        <select id="game-filter" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                            <option value="all">All Games</option>
+                            <option value="white-win">White Wins</option>
+                            <option value="black-win">Black Wins</option>
+                            <option value="draw">Draws</option>
+                        </select>
+                    </div>
+                    <div id="game-list" class="mt-6 max-h-64 overflow-y-auto">
+                        <!-- @TOODO add the game list -->
+                    </div>
+                </div>
+                
+                <!-- Interactive chessboard -->
+                <div class="bg-white rounded-lg shadow-md p-6 lg:col-span-2">
+                    <h3 class="text-xl font-semibold mb-4">Game Replay</h3>
+                    <div id="chess-board" class="w-full mb-4 aspect-square max-w-md mx-auto"></div>
+                    <div class="flex justify-center space-x-4 my-4">
+                        <button id="btn-start" class="board-control-btn">
+                            <i class="fas fa-fast-backward"></i>
+                        </button>
+                        <button id="btn-prev" class="board-control-btn">
+                            <i class="fas fa-step-backward"></i>
+                        </button>
+                        <button id="btn-play" class="board-control-btn">
+                            <i class="fas fa-play"></i>
+                        </button>
+                        <button id="btn-next" class="board-control-btn">
+                            <i class="fas fa-step-forward"></i>
+                        </button>
+                        <button id="btn-end" class="board-control-btn">
+                            <i class="fas fa-fast-forward"></i>
+                        </button>
+                    </div>
+                    <div id="move-history" class="h-40 overflow-y-auto border border-gray-200 rounded p-3">
+                        <!-- @TOODO add the history of moves -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Opening Explorer Section -->
+    <section id="opening-explorer" class="py-16 px-4">
+        <div class="container mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4">Opening Explorer</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                    In this section we will discover popular chess openings and analyze their effectiveness
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
+                <!-- Opening categories -->
+                <div class="bg-white rounded-lg shadow-md p-6 lg:col-span-2">
+                    <h3 class="text-xl font-semibold mb-4">Opening Categories</h3>
+                    <div class="space-y-2">
+                        <div class="opening-category">
+                            <h4 class="font-medium">E - Indian Defenses</h4>
+                            <div class="pl-4 mt-2 opening-list">
+                                <div class="opening-item">King's Indian Defense</div>
+                                <div class="opening-item">Nimzo-Indian Defense</div>
+                                <div class="opening-item">Queen's Indian Defense</div>
+                            </div>
+                        </div>
+                        <div class="opening-category">
+                            <h4 class="font-medium">C - Open Games</h4>
+                            <div class="pl-4 mt-2 opening-list">
+                                <div class="opening-item">Ruy Lopez</div>
+                                <div class="opening-item">Italian Game</div>
+                                <div class="opening-item">Scotch Game</div>
+                            </div>
+                        </div>
+                        <div class="opening-category">
+                            <h4 class="font-medium">B - Semi-Open Games</h4>
+                            <div class="pl-4 mt-2 opening-list">
+                                <div class="opening-item">Sicilian Defense</div>
+                                <div class="opening-item">French Defense</div>
+                                <div class="opening-item">Caro-Kann Defense</div>
+                            </div>
+                        </div>
+                        <!-- @TODO: add more opening categories -->
+                    </div>
+                </div>
+                
+                <!-- Opening visualization -->
+                <div class="bg-white rounded-lg shadow-md p-6 lg:col-span-3">
+                    <h3 class="text-xl font-semibold mb-4">Opening Analysis</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <div id="opening-board" class="w-full aspect-square max-w-xs mx-auto mb-4"></div>
+                            <div id="opening-moves" class="text-gray-700 mt-2">
+                                <p>1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4</p>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-medium mb-3">Sicilian Defense: Najdorf Variation</h4>
+                            <div id="opening-stats" class="space-y-4">
+                                <div>
+                                    <p class="text-sm text-gray-600">Win rate:</p>
+                                    <div class="flex items-center mt-1">
+                                        <div class="h-5 bg-white w-1/4 border-r border-gray-300"></div>
+                                        <div class="h-5 bg-gray-300 w-1/4"></div>
+                                        <div class="h-5 bg-black w-1/2"></div>
+                                    </div>
+                                    <div class="flex justify-between text-sm mt-1">
+                                        <span>White: 25%</span>
+                                        <span>Draw: 25%</span>
+                                        <span>Black: 50%</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gray-600">Popularity by rating:</p>
+                                    <div id="opening-rating-chart" class="h-40 mt-2"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-6">
+                        <h4 class="font-medium mb-3">Common Variations</h4>
+                        <div id="variations-list" class="space-y-2">
+                            <!-- @TODO: Add the variations here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Network Graph Section -->
+    <section id="network-graph" class="py-16 px-4 bg-gray-100">
+        <div class="container mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4">Player Networks</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                    Explore the interconnected network of players and their matches
+                </p>
+                <p class="text-gray-700 mb-4">
+                    In this section we will show relationships between players based on their games against each other.
+                </p>
+            </div>
+            
+            <div class="bg-white rounded-lg shadow-lg p-6">                
+                <div id="network-info" class="mt-6">
+                    <h3 class="text-lg font-medium mb-2">Network Statistics</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                        <div class="p-4 bg-gray-50 rounded-lg">
+                            <p class="text-gray-600 text-sm">Total Players</p>
+                            <p class="text-2xl font-bold" id="total-players">324</p>
+                        </div>
+                        <div class="p-4 bg-gray-50 rounded-lg">
+                            <p class="text-gray-600 text-sm">Total Connections</p>
+                            <p class="text-2xl font-bold" id="total-connections">892</p>
+                        </div>
+                        <div class="p-4 bg-gray-50 rounded-lg">
+                            <p class="text-gray-600 text-sm">Most Connected Player</p>
+                            <p class="text-2xl font-bold" id="most-connected">MagnusCarlsen</p>
+                        </div>
+                        <div class="p-4 bg-gray-50 rounded-lg">
+                            <p class="text-gray-600 text-sm">Most Frequent Matchup</p>
+                            <p class="text-lg font-bold" id="most-frequent">Player1 vs Player2</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Heatmap Section -->
+    <section id="heatmap" class="py-16 px-4">
+        <div class="container mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4">Chess Board Heatmaps</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                    Visualize piece movements and hotspots on the chess board
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-xl font-semibold mb-4">Piece Movement Frequency</h3>
+                    <div class="space-y-4">
+                        <div class="flex flex-wrap gap-3 justify-center">
+                            <button class="piece-filter-btn active" data-piece="all">All Pieces</button>
+                            <button class="piece-filter-btn" data-piece="p">Pawns</button>
+                            <button class="piece-filter-btn" data-piece="n">Knights</button>
+                            <button class="piece-filter-btn" data-piece="b">Bishops</button>
+                            <button class="piece-filter-btn" data-piece="r">Rooks</button>
+                            <button class="piece-filter-btn" data-piece="q">Queens</button>
+                            <button class="piece-filter-btn" data-piece="k">Kings</button>
+                        </div>
+                        <div id="movement-heatmap" class="w-full aspect-square max-w-md mx-auto"></div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-xl font-semibold mb-4">Piece Capture Locations</h3>
+                    <div class="space-y-4">
+                        <div class="flex justify-center gap-3">
+                            <button class="side-filter-btn active" data-side="all">All Captures</button>
+                            <button class="side-filter-btn" data-side="w">White Captures</button>
+                            <button class="side-filter-btn" data-side="b">Black Captures</button>
+                        </div>
+                        <div id="capture-heatmap" class="w-full aspect-square max-w-md mx-auto"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12 px-4">
+        <div class="container mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Chess Insights</h3>
+                    <p class="text-gray-300">
+                        An interactive data visualization project exploring chess games from Lichess.org
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Project Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="https://github.com/com-480-data-visualization/Team-GB" class="text-gray-300 hover:text-white transition">GitHub Repository</a></li>
+                        <li><a href="https://www.kaggle.com/datasets/datasnaek/chess" class="text-gray-300 hover:text-white transition">Dataset Source</a></li>
+                        <li><a href="https://github.com/com-480-data-visualization/Team-GB/blob/master/README.md" class="text-gray-300 hover:text-white transition">Documentation</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Team</h3>
+                    <p class="text-gray-300">
+                        Created by TeamGB for the Data Visualization Course
+                    </p>
+                    <div class="mt-4 flex space-x-4">
+                        <a href="https://github.com/com-480-data-visualization/Team-GB" class="text-gray-300 hover:text-white transition"><i class="fab fa-github fa-lg"></i></a>
+                        <!-- <a href="#" class="text-gray-300 hover:text-white transition"><i class="fab fa-linkedin fa-lg"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-white transition"><i class="fab fa-twitter fa-lg"></i></a> -->
+                    </div>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-gray-700 text-center text-gray-400">
+                <p>&copy; 2025 TeamGB - Chess Insights. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JS Files -->
+    <!-- @TODO: make the following js  -->
+    <!-- <script src="scripts/dashboard.js"></script>
+    <script src="scripts/player-stats.js"></script>
+    <script src="scripts/game-analysis.js"></script>
+    <script src="scripts/opening-explorer.js"></script>
+    <script src="scripts/network-graph.js"></script>
+    <script src="scripts/heatmap.js"></script> -->
 </body>
 </html>
