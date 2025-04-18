@@ -4,7 +4,7 @@
 
 ### I. Introduction ♟️
 
-Chess is an absolutely fascinating game. For many of us, it’s a childhood memory, learned with family and shared with loved ones. But chess is also much more than that — behind its apparent simplicity lies a world of strategy, precision, and mental endurance. Some even consider it a sport, as it demands intense focus and control.
+Chess is an absolutely fascinating game. For many of us, it’s a childhood memory, learned with family and shared with loved ones. But chess is also much more than that: behind its apparent simplicity lies a world of strategy, precision, and mental endurance. Some even consider it a sport, as it demands intense focus and control.
 
 It is precisely this duality that our website is built upon. Our goal is to speak to all types of users: from beginners just discovering the game to experienced players eager to explore its full complexity. That’s why our team, “Team GB,” designed this platform as a meeting point for all chess enthusiasts, whatever their level.
 
@@ -33,7 +33,7 @@ To give an initial idea of what our visualizations might look like, we have sket
 
 **→ Graph ideas for opening strategies:**  
 <p align="center">
-    <img src="images/schema_1.jpg" width="30%"/>
+    <img src="images/schema_1.jpg" width="50%"/>
     <img src="images/schema_2.jpg" width="30%"/>
     <img src="images/schema_3.jpg" width="30%"/>
 </p>
