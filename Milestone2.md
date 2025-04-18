@@ -2,7 +2,7 @@
 
 **Due to 18th April, 5pm**
 
-### I. Introduction ♟️
+### I. Introduction 
 
 Chess is an absolutely fascinating game. For many of us, it’s a childhood memory, learned with family and shared with loved ones. But chess is also much more than that: behind its apparent simplicity lies a world of strategy, precision, and mental endurance. Some even consider it a sport, as it demands intense focus and control.
 
@@ -37,6 +37,7 @@ To give an initial idea of what our visualizations might look like, we have sket
     <img src="images/schema_2.jpg" width="30%"/>
     <img src="images/schema_3.jpg" width="30%"/>
 </p>
+
 **→ Graph ideas for statistical analysis of the game:**  
 <p align="center">
     <img src="images/schema_4.jpg" width="30%"/>
@@ -50,6 +51,6 @@ To give an initial idea of what our visualizations might look like, we have sket
     <img src="images/schema_8.jpg" width="25%"/>
 </p>
 
-### V. Visualization Tools and Related Lecture 🛠️
+### V. Visualization Tools and Related Lecture 
 
 To create our visualizations, we will use Python with pandas, matplotlib, and seaborn for basic stats and charts, as covered in the « Tabular Data and Graphs » lectures. For more interactive elements like heatmaps and animated boards, we’ll use D3.js, based on the « D3.js », « Interactive D3.js », and « Marks, Channels » lectures. The interactive chessboard will be built with JavaScript and the Lichess API, following what we saw in the « Javascript » course. For building the interface or dashboard, we might use Streamlit or React, as seen in « Beyond Visualization ».
