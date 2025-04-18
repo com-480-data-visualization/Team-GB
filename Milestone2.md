@@ -1,6 +1,6 @@
 # Project : Milestone 2
 
-**Due to 18th Aprrl, 5pm**
+**Due to 18th April, 5pm**
 
 ### I. Introduction ♟️
 
