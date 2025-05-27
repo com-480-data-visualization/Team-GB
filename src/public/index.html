@@ -13,67 +13,61 @@
     <link rel="manifest" href="images/favicon/site.webmanifest">
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
     <!-- CSS -->
     <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/home-style.css">
     <!-- JS -->
     <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/plotly.js-dist@2.24.1/plotly.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chess.js@1.0.0-beta.6/dist/chess.min.js"></script>
+    <script type="importmap">
+        {
+          "imports": {
+            "three":  "https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.module.js",
+            "three/": "https://cdn.jsdelivr.net/npm/three@0.158.0/"
+          }
+        }
+    </script>
 </head>
-<body class="bg-gray-50 font-sans">
+<body>
     <!-- Header Nav -->
-    <nav class="bg-white shadow-md">
-        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <div class="flex items-center">
-                <img src="images/logo.svg" alt="Chess Insights Logo" class="h-10 mr-3">
-                <span class="text-xl font-bold">Chess Insights</span>
-            </div>
-            <div class="hidden md:flex space-x-6">
-                <a href="#dashboard" class="nav-link">Dashboard</a>
+    <nav>
+        <div class="nav-container">
+            <!-- <div class="logo">
+                <img src="images/logo.svg" alt="Chess Insights Logo">
+                <span class="logo-text">Chess Insights</span>
+            </div> -->
+            <a href="/" class="logo">
+                <img src="images/logo.svg" alt="Chess Insights Logo">
+                <span class="logo-text">Chess Insights</span>
+              </a>
+            <div class="nav-links">
+                <a href="/#dashboard" class="nav-link">Dashboard</a>
+                <a href="/board" class="nav-link">Board</a>
                 <a href="/pieces" class="nav-link">Pieces</a>
-                <a href="#player-stats" class="nav-link">Player Stats</a>
-                <a href="#game-analysis" class="nav-link">Game Analysis</a>
-                <a href="#opening-explorer" class="nav-link">Opening Explorer</a>
-                <a href="#about" class="nav-link">About</a>
+                <a href="/#player-stats" class="nav-link">Player Stats</a>
+                <a href="/#game-analysis" class="nav-link">Game Analysis</a>
+                <a href="/#opening-explorer" class="nav-link">Opening Explorer</a>
+                <a href="/#about" class="nav-link">About</a>
             </div>
-            <button class="md:hidden" id="mobile-menu-button">
-                <i class="fas fa-bars text-xl"></i>
+            <button class="mobile-menu-button" id="mobile-menu-button">
+                <i class="fas fa-bars"></i>
             </button>
         </div>
-        <!-- Mobile nav -->
-        <div class="md:hidden hidden" id="mobile-menu">
-            <div class="px-2 pt-2 pb-3 space-y-1">
-                <a href="#dashboard" class="mobile-nav-link">Dashboard</a>
-                <a href="#player-stats" class="mobile-nav-link">Player Stats</a>
-                <a href="#game-analysis" class="mobile-nav-link">Game Analysis</a>
-                <a href="#opening-explorer" class="mobile-nav-link">Opening Explorer</a>
-                <a href="#about" class="mobile-nav-link">About</a>
-            </div>
+        <div class="mobile-menu" id="mobile-menu">
+            <a href="/#dashboard" class="mobile-nav-link">Dashboard</a>
+            <a href="/board" class="mobile-nav-link">Board</a>
+            <a href="/pieces" class="mobile-nav-link">Pieces</a>
+            <a href="/#player-stats" class="mobile-nav-link">Player Stats</a>
+            <a href="/#game-analysis" class="mobile-nav-link">Game Analysis</a>
+            <a href="/#opening-explorer" class="mobile-nav-link">Opening Explorer</a>
+            <a href="/#about" class="mobile-nav-link">About</a>
         </div>
     </nav>
-
     <!-- Home Title -->
-    <!-- <header class="py-12 px-4 md:px-8 bg-white">
-        <div class="container mx-auto text-center">
-          <h1 class="text-4xl md:text-5xl font-bold mb-4 text-black">Chess Data Visualization</h1>
-          <p class="text-xl md:text-2xl max-w-3xl mx-auto mb-8 text-black">
-            Exploring 20,000+ Lichess games through interactive visualizations and insightful analysis
-          </p>
-          <div class="flex justify-center space-x-4">
-            <a href="#dashboard" class="bg-white text-black border border-gray-300 hover:text-blue-500 hover:border-blue-500 px-6 py-3 rounded-lg font-medium transition">Explore Dashboard</a>
-            <a href="#about" class="bg-transparent border-2 border-black text-black hover:text-blue-500 hover:border-blue-500 px-6 py-3 rounded-lg font-medium transition">Learn More</a>
-          </div>
-        </div>
-    </header> -->
-
-    <!-- py-16 -->
-    <!-- <section id="home-board" class="chess-board-interactive"> 
-        <div id="board-container" class="chess-board-container"></div>
-    </section> -->
-
-
     <section id="home-board" class="chess-board-interactive">
         <div id="board-container" class="chess-board-container"></div>
       
@@ -98,8 +92,9 @@
           </div>
         </header>
     </section>
+    
+    <!-- WIP from here -->
       
-
     <!-- Intro Section -->
     <section id="about" class="py-16 px-4">
         <div class="container mx-auto">
@@ -432,6 +427,8 @@
             </div>
         </div>
     </section>
+    
+    <!-- End of WIP -->
 
     <!-- Footer -->
     <footer class="bg-gray-800 text-white py-12 px-4">
@@ -449,6 +446,7 @@
                         <li><a href="https://github.com/com-480-data-visualization/Team-GB" class="text-gray-300 hover:text-white transition">GitHub Repository</a></li>
                         <li><a href="https://www.kaggle.com/datasets/datasnaek/chess" class="text-gray-300 hover:text-white transition">Dataset Source</a></li>
                         <!-- <li><a href="https://github.com/com-480-data-visualization/Team-GB/blob/master/README.md" class="text-gray-300 hover:text-white transition">Documentation</a></li> -->
+                        <li><a href="https://www.team-gb.org/credits" class="text-gray-300 hover:text-white transition">Credits</a></li>
                     </ul>
                 </div>
                 <div>
@@ -470,21 +468,16 @@
     </footer>
 
     <!-- JS Files -->
+    <script type="module" src="./scripts/chess-board.js"></script>
     <!-- @TODO: make the following js  -->
-    <!-- <script src="scripts/dashboard.js"></script>
+    <!-- 
+    <script src="./scripts/main.js"></script>
+    <script src="scripts/dashboard.js"></script>
     <script src="scripts/player-stats.js"></script>
     <script src="scripts/game-analysis.js"></script>
     <script src="scripts/opening-explorer.js"></script>
     <script src="scripts/network-graph.js"></script>
-    <script src="scripts/heatmap.js"></script> -->
-    <script type="importmap">
-        {
-          "imports": {
-            "three":  "https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.module.js",
-            "three/": "https://cdn.jsdelivr.net/npm/three@0.158.0/"
-          }
-        }
-    </script>
-    <script type="module" src="./scripts/chess-board.js"></script>
+    <script src="scripts/heatmap.js"></script> 
+    -->
 </body>
 </html>

@@ -1,0 +1,53 @@
+:root { 
+  --primary-color: #3C6E71; 
+  --secondary-color: #70AE6E; 
+  --accent-color: #F4A259; 
+  --dark-color: #353535; 
+  --light-color: #F5F5F5; 
+  --board-light: #F0D9B5; 
+  --board-dark: #B58863; 
+  --hover-blue: #348afa;
+}
+
+/**
+* Home Styles
+*/
+.chess-board-interactive {
+  background-color: #000000;
+  padding-bottom: 10px;
+  width: 100%;
+  height: auto;
+}
+.chess-board-container {
+  position: relative;
+  width: 100%;
+  /* OPTION A: fixed height */
+  height: 800px;
+  /* OPTION B: responsive aspect-ratio (16:9) */
+  /* padding-bottom: 56.25%; */
+}
+.chess-board-container canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
+.home-header {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) translateY(-20px);
+  opacity: 0;
+  width: 100%;
+  pointer-events: none;  
+  transition: opacity 1.0s ease-out,
+              transform 1.0s ease-out;
+  z-index: 10;         
+}
+.home-header.visible {
+  opacity: 1;
+  transform: translate(-50%, -50%) translateY(0);
+  pointer-events: auto;
+}

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Credits - Chess Insights</title>
+        <!-- Favicon -->
+        <link rel="icon" type="image/png" href="images/favicon/favicon-96x96.png" sizes="96x96">
+        <link rel="icon" type="image/svg+xml" href="images/favicon/favicon.svg">
+        <link rel="shortcut icon" href="images/favicon/favicon.ico">
+        <link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-touch-icon.png">
+        <link rel="manifest" href="images/favicon/site.webmanifest">
+        <!-- Fonts -->
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+        <!-- CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="styles/style.css">
+        <style>
+            body { font-family: 'Roboto', sans-serif; background: #fff; color: #333; }
+            h1 { font-family: 'Playfair Display', serif; font-size: 2.5rem; font-weight: 700; }
+            .linky { color: #000; text-decoration: underline; }
+            .credits { padding-top: 50px; padding-bottom: 400px; }
+        </style>        
+    </head>
+    <body class="min-h-screen flex flex-col">
+        <nav>
+            <div class="nav-container">
+                <a href="/" class="logo">
+                  <img src="images/logo.svg" alt="Chess Insights Logo">
+                  <span class="logo-text">Chess Insights</span>
+                </a>
+                <div class="nav-links">
+                    <a href="/#dashboard" class="nav-link">Dashboard</a>
+                    <a href="/board" class="nav-link">Board</a>
+                    <a href="/pieces" class="nav-link">Pieces</a>
+                    <a href="/#player-stats" class="nav-link">Player Stats</a>
+                    <a href="/#game-analysis" class="nav-link">Game Analysis</a>
+                    <a href="/#opening-explorer" class="nav-link">Opening Explorer</a>
+                    <a href="/#about" class="nav-link">About</a>
+                </div>
+                <button class="mobile-menu-button" id="mobile-menu-button">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <div class="mobile-menu" id="mobile-menu">
+                <a href="/#dashboard" class="mobile-nav-link">Dashboard</a>
+                <a href="/board" class="mobile-nav-link">Board</a>
+                <a href="/pieces" class="mobile-nav-link">Pieces</a>
+                <a href="/#player-stats" class="mobile-nav-link">Player Stats</a>
+                <a href="/#game-analysis" class="mobile-nav-link">Game Analysis</a>
+                <a href="/#opening-explorer" class="mobile-nav-link">Opening Explorer</a>
+                <a href="/#about" class="mobile-nav-link">About</a>
+            </div>
+        </nav>
+
+        <main class="container credits mx-auto px-4 pt-22 pb-8 flex-grow">
+            <h1 class="mb-6">Credits</h1>
+            <ul class="list-disc list-inside space-y-2 text-lg">
+              <li><strong>3D models:</strong> <a class="linky" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">Organic Chess Set</a>, <a class="linky" href="https://free3d.com/3d-model/chess-table-18114.html" target="_blank">Chess Table</a></li>
+              <li><strong>Icons:</strong> <a class="linky" href="https://fontawesome.com/" target="_blank">Font Awesome Free</a></li>
+              <li><strong>Fonts:</strong> <a class="linky" href="https://fonts.google.com/specimen/Playfair+Display" target="_blank">Playfair Display</a>, <a class="linky" href="https://fonts.google.com/specimen/Roboto" target="_blank">Roboto</a></li>
+              <li><strong>Frameworks & Libraries:</strong> <a class="linky" href="https://tailwindcss.com/" target="_blank">Tailwind CSS</a></li>
+              <li><strong>Generated Assets:</strong> AI-generated imagery by ChatGPT & DALL·E</li>
+              <!-- 
+              <li><strong>Design & Concept:</strong> Chess Insights Team</li>
+              <li><strong>Development:</strong> Chess Insights Web Team</li>
+              <li><strong>Chess Piece Photography & Renders:</strong> Custom designs inspired by editorial styling</li> 
+              -->
+            </ul>
+        </main>
+          
+
+        <footer class="bg-gray-800 text-white py-12 px-4">
+            <div class="container mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div>
+                        <h3 class="text-xl font-semibold mb-4">Chess Insights</h3>
+                        <p class="text-gray-300">
+                            An interactive data visualization project exploring chess games from Lichess.org
+                        </p>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4">Project Links</h3>
+                        <ul class="space-y-2">
+                            <li><a href="https://github.com/com-480-data-visualization/Team-GB" class="text-gray-300 hover:text-white transition">GitHub Repository</a></li>
+                            <li><a href="https://www.kaggle.com/datasets/datasnaek/chess" class="text-gray-300 hover:text-white transition">Dataset Source</a></li>
+                            <!-- <li><a href="https://github.com/com-480-data-visualization/Team-GB/blob/master/README.md" class="text-gray-300 hover:text-white transition">Documentation</a></li> -->
+                            <li><a href="https://www.team-gb.org/credits" class="text-gray-300 hover:text-white transition">Credits</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4">Team</h3>
+                        <p class="text-gray-300">
+                            Created by TeamGB for the Data Visualization Course
+                        </p>
+                        <div class="mt-4 flex space-x-4">
+                            <a href="https://github.com/com-480-data-visualization/Team-GB" class="text-gray-300 hover:text-white transition"><i class="fab fa-github fa-lg"></i></a>
+                            <!-- <a href="#" class="text-gray-300 hover:text-white transition"><i class="fab fa-linkedin fa-lg"></i></a>
+                            <a href="#" class="text-gray-300 hover:text-white transition"><i class="fab fa-twitter fa-lg"></i></a> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-8 pt-8 border-t border-gray-700 text-center text-gray-400">
+                    <p>&copy; 2025 TeamGB - Chess Insights. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </body>
+</html>

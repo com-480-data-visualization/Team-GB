@@ -1,258 +1,431 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Three.js Board + Path Animation with Pivots</title>
-  <style>
-    body { margin: 0; overflow: hidden; }
-    canvas { display: block; }
-    button { position: absolute; z-index: 1; }
-    #toggleControl { top: 10px; left: 10px; }
-    #modeBtn       { top: 50px; left: 10px; }
-    #restartBtn    { top: 90px; left: 10px; }
-  </style>
-  <script type="importmap">
-  {
-    "imports": {
-      "three":  "https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.module.js",
-      "three/": "https://cdn.jsdelivr.net/npm/three@0.158.0/"
-    }
-  }
-  </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Chess Insights - The Pieces</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/favicon/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/svg+xml" href="images/favicon/favicon.svg">
+    <link rel="shortcut icon" href="images/favicon/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-touch-icon.png">
+    <link rel="manifest" href="images/favicon/site.webmanifest">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <!-- CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/pieces-style.css">
+    <!-- JS -->
+    <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/plotly.js-dist@2.24.1/plotly.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chess.js@1.0.0-beta.6/dist/chess.min.js"></script>
+    <script type="importmap">
+        {
+          "imports": {
+            "three":  "https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.module.js",
+            "three/": "https://cdn.jsdelivr.net/npm/three@0.158.0/"
+          }
+        }
+    </script>
 </head>
 <body>
-  <!-- <button id="toggleControl">Control: Light</button>
-  <button id="modeBtn">Mode: Translate</button>
-  <button id="restartBtn">Restart Animation</button> -->
+    <nav>
+        <div class="nav-container">
+            <a href="/" class="logo">
+                <img src="images/logo.svg" alt="Chess Insights Logo">
+                <span class="logo-text">Chess Insights</span>
+              </a>
+            <div class="nav-links">
+                <a href="/#dashboard" class="nav-link">Dashboard</a>
+                <a href="/board" class="nav-link">Board</a>
+                <a href="/pieces" class="nav-link">Pieces</a>
+                <a href="/#player-stats" class="nav-link">Player Stats</a>
+                <a href="/#game-analysis" class="nav-link">Game Analysis</a>
+                <a href="/#opening-explorer" class="nav-link">Opening Explorer</a>
+                <a href="/#about" class="nav-link">About</a>
+            </div>
+            <button class="mobile-menu-button" id="mobile-menu-button">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <div class="mobile-menu" id="mobile-menu">
+            <a href="/#dashboard" class="mobile-nav-link">Dashboard</a>
+            <a href="/board" class="mobile-nav-link">Board</a>
+            <a href="/pieces" class="mobile-nav-link">Pieces</a>
+            <a href="/#player-stats" class="mobile-nav-link">Player Stats</a>
+            <a href="/#game-analysis" class="mobile-nav-link">Game Analysis</a>
+            <a href="/#opening-explorer" class="mobile-nav-link">Opening Explorer</a>
+            <a href="/#about" class="mobile-nav-link">About</a>
+        </div>
+    </nav>
 
-  <script type="module">
-    import * as THREE            from 'three';
-    import { GLTFLoader }        from 'three/examples/jsm/loaders/GLTFLoader.js';
-    import { OrbitControls }     from 'three/examples/jsm/controls/OrbitControls.js';
+    <div class="hero">
+        <h1 class="hero-title">The Pieces</h1>
+        <p class="hero-subtitle">Discover the unique roles and movements of each chess piece</p>
+    </div>
 
-    // — Scene / Camera / Renderer —
-    const scene    = new THREE.Scene();
-    const camera   = new THREE.PerspectiveCamera( 60, innerWidth/innerHeight, 0.1, 1000 );
-    camera.position.set(0, 10, 16);
-    camera.rotation.set(
-        THREE.MathUtils.degToRad(-25), 0, 0
-    );
-    const renderer = new THREE.WebGLRenderer({ antialias: true });
-    renderer.setSize(innerWidth, innerHeight);
-    document.body.appendChild(renderer.domElement);
+    <div class="slideshow-container">
+        <!-- King Slide -->
+        <div class="slide active">
+            <div class="slide-content-wrapper">
+                <div class="slide-image-container">
+                    <img src="../images/pieces/king.png" alt="Chess King" class="piece-image">
+                </div>
+                <div class="slide-text">
+                    <h2 class="piece-name">King</h2>
+                    <p class="piece-description">
+                        The most important piece on the board. The King can move one square in any direction—horizontally, vertically, or diagonally. While not the most powerful piece, losing your King means losing the game. The King must be protected at all costs and can participate in the special move called castling.
+                    </p>
+                </div>
+            </div>
+        </div>
 
-    /**
-     * Load the model
-     */
-    const loader = new GLTFLoader();
-    let mixer, board;
-    loader.load('../models/chess_board.glb',
-        gltf => {
-        board = gltf.scene;
-        scene.add(board);
-        if (gltf.animations.length) {
-            mixer = new THREE.AnimationMixer(board);
-            gltf.animations.forEach(clip => mixer.clipAction(clip).play());
-        }
-        },
-        xhr => console.log(`Loaded ${(xhr.loaded/xhr.total*100).toFixed(1)}%`),
-        err => console.error(err)
-    );
+        <!-- Queen Slide -->
+        <div class="slide">
+            <div class="slide-content-wrapper">
+                <div class="slide-image-container">
+                    <img src="../images/pieces/queen.png" alt="Chess Queen" class="piece-image">
+                </div>
+                <div class="slide-text">
+                    <h2 class="piece-name">Queen</h2>
+                    <p class="piece-description">
+                        The most powerful piece on the chessboard. The Queen combines the movement of a Rook and Bishop, moving any number of squares horizontally, vertically, or diagonally. With her incredible range and flexibility, the Queen is often the key to launching devastating attacks and controlling the center of the board.
+                    </p>
+                </div>
+            </div>
+        </div>
 
-    const orbit = new OrbitControls(camera, renderer.domElement);
-    orbit.enableDamping = true;
+        <!-- Rook Slide -->
+        <div class="slide">
+            <div class="slide-content-wrapper">
+                <div class="slide-image-container">
+                    <img src="../images/pieces/rook.png" alt="Chess Rook" class="piece-image">
+                </div>
+                <div class="slide-text">
+                    <h2 class="piece-name">Rook</h2>
+                    <p class="piece-description">
+                        A powerful long-range piece that moves any number of squares horizontally or vertically. Rooks are particularly effective on open files and ranks, often dominating the endgame. They participate in the special castling move with the King and are essential for controlling key squares and launching attacks.
+                    </p>
+                </div>
+            </div>
+        </div>
 
+        <!-- Bishop Slide -->
+        <div class="slide">
+            <div class="slide-content-wrapper">
+                <div class="slide-image-container">
+                    <img src="../images/pieces/bishop.png" alt="Chess Bishop" class="piece-image">
+                </div>
+                <div class="slide-text">
+                    <h2 class="piece-name">Bishop</h2>
+                    <p class="piece-description">
+                        The Bishop moves diagonally any number of squares and is bound to squares of one color throughout the game. Each player starts with one light-squared and one dark-squared Bishop. Bishops work best on open diagonals and are particularly powerful when working together as a "Bishop pair."
+                    </p>
+                </div>
+            </div>
+        </div>
 
+        <!-- Knight Slide -->
+        <div class="slide">
+            <div class="slide-content-wrapper">
+                <div class="slide-image-container">
+                    <img src="../images/pieces/knight.png" alt="Chess Knight" class="piece-image">
+                </div>
+                <div class="slide-text">
+                    <h2 class="piece-name">Knight</h2>
+                    <p class="piece-description">
+                        The most unique piece on the board, moving in an "L" shape—two squares in one direction and one square perpendicular. Knights are the only pieces that can jump over other pieces, making them excellent for surprise attacks and navigating crowded positions. They're particularly effective in closed positions.
+                    </p>
+                </div>
+            </div>
+        </div>
 
-    /**
-     * Lighting
-     */
-    const light  = new THREE.DirectionalLight(0xffffff, 1);
-    light.position.set(10, 20, 15);
-    light.target.position.set(0,0,0);
-    scene.add(light, light.target);
+        <!-- Pawn Slide -->
+        <div class="slide">
+            <div class="slide-content-wrapper">
+                <div class="slide-image-container">
+                    <img src="../images/pieces/pawn.png" alt="Chess Pawn" class="piece-image">
+                </div>
+                <div class="slide-text">
+                    <h2 class="piece-name">Pawn</h2>
+                    <p class="piece-description">
+                        The foot soldiers of chess. Pawns move forward one square, or two squares from their starting position. They capture diagonally and can be promoted to any piece (except King) upon reaching the opposite end of the board. Despite being the least valuable piece, pawns form the backbone of chess strategy and structure.
+                    </p>
+                </div>
+            </div>
+        </div>
 
-    const pLight = new THREE.PointLight(0x88ccff, 0.8, 100);
-    pLight.position.set(0, 10, 0);
-    scene.add(pLight);
+        <!-- Navigation buttons -->
+        <button class="nav-button prev" onclick="changeSlide(-1)">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="nav-button next" onclick="changeSlide(1)">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+    </div>
 
-  // 1) Base ambient light for overall fill
-    const ambient = new THREE.AmbientLight(0x404040, 1.5);
-    //               ↑ color      ↑ intensity
-    scene.add(ambient);
-
-    // 2) Hemisphere light for sky/ground gradient
-    const hemi = new THREE.HemisphereLight(0xffffff, 0x222222, 0.8);
-    //                        ↑ skyColor   ↑ groundColor  ↑ intensity
-    hemi.position.set(0, 50, 0);
-    scene.add(hemi);
-
-    // 3) Corner point-lights around the board
-    const cornerPositions = [
-    [ 10,  5,  10],
-    [-10,  5,  10],
-    [ 10,  5, -10],
-    [-10,  5, -10]
-    ];
-    cornerPositions.forEach(([x,y,z]) => {
-    const pl = new THREE.PointLight(0xffeecc, 0.6, 50);
-    pl.position.set(x, y, z);
-    scene.add(pl);
-    });
-
-    // 4) A rim spotlight for dramatic edge-lighting
-    const spot = new THREE.SpotLight(0xffffff, 1);
-    //                   ↑ color   ↑ intensity
-    spot.position.set(0, 15, -15);
-    spot.angle = Math.PI / 8;      // narrow cone
-    spot.penumbra = 0.3;           // soft edge
-    spot.decay = 2;
-    spot.distance = 50;
-    spot.target.position.set(0, 0, 0);
-    scene.add(spot, spot.target);
-
-    // 5) (Optional) Tiny colored points for accent
-    const accent = new THREE.PointLight(0x0066ff, 0.3, 30);
-    accent.position.set(5, 3, 0);
-    scene.add(accent);
-
-
-    /**
-     * Animation (Smooth Path)
-     */
-    const pathData = [
-        { 
-        position: new THREE.Vector3(0.6, -10, -40),
-        rotation: new THREE.Euler(0.2, THREE.MathUtils.degToRad(180), 0) // add 90° around X
-        },
-        { 
-        position: new THREE.Vector3(0.6, 9, 15),
-        rotation: new THREE.Euler(-0.3, THREE.MathUtils.degToRad(180), 0) // add 90° around X
-        },
-        { 
-        position: new THREE.Vector3(0, 9.9, 15.5),
-        rotation: new THREE.Euler(THREE.MathUtils.degToRad(90), THREE.MathUtils.degToRad(180), 0) // add 90° around X
-        },
-        { 
-        position: new THREE.Vector3(0, 0, -5),
-        rotation: new THREE.Euler(0, 0, 0) // add 90° around X
-        },
-    ];
-
-    const segmentDurations = [
-        7.5,   // time from waypoint 0 → 1
-        0.9,
-        6.5
-    ];
-    let segmentIndex   = 0;
-    let segmentElapsed = 0; 
-    let isPathAnim = true;
+    <!-- Dots indicator -->
+    <div class="dots-container">
+        <span class="dot active" onclick="currentSlide(1)"></span>
+        <span class="dot" onclick="currentSlide(2)"></span>
+        <span class="dot" onclick="currentSlide(3)"></span>
+        <span class="dot" onclick="currentSlide(4)"></span>
+        <span class="dot" onclick="currentSlide(5)"></span>
+        <span class="dot" onclick="currentSlide(6)"></span>
+    </div>
 
 
-    // function restartAnimation() {
-    //     totalProgress = 0;
-    //     isPathAnim = true;
-    //     // const startTransform = getInterpolatedTransform(0);
-    //     board.quaternion.copy(startTransform.rotation);
-    //     console.log('Animation restarted');
-    // }
-    // document.getElementById('restartBtn').addEventListener('click', restartAnimation);
+    <!-- Movement Section -->
+    <div class="movement-section">
+        <div class="movement-container">
+        <h2 class="movement-title" id="movement-title">How the King Moves</h2>
+        <div class="movement-board" id="movement-board">
+            <!-- Board will be generated by JavaScript -->
+        </div>
+        <div class="movement-legend">
+            <div class="legend-item">
+            <div class="legend-color legend-piece"></div>
+            <span>Current Position</span>
+            </div>
+            <div class="legend-item">
+            <div class="legend-color legend-move"></div>
+            <span>Possible Moves</span>
+            </div>
+            <div class="legend-item">
+            <div class="legend-color legend-attack"></div>
+            <span>Attack Moves</span>
+            </div>
+        </div>
+        </div>
+    </div>
 
-    const clock = new THREE.Clock();
+    <script>
+        let slideIndex = 1;
 
-    function animate() {
-        requestAnimationFrame(animate);
-        const delta = clock.getDelta();
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('show');
+        });
 
-        if (isPathAnim && board) {
-            // 1) accumulate time in this segment
-            segmentElapsed += delta;
-            const segTime = segmentDurations[segmentIndex];
-            let t = segmentElapsed / segTime;  // 0 → 1 progress in this leg
-
-            // 2) if this leg is done, move to the next
-            if (t >= 1) {
-            segmentElapsed -= segTime;      // carry over extra time
-            segmentIndex++;
-            if (segmentIndex >= pathData.length - 1) {
-                segmentIndex = pathData.length - 1;
-                isPathAnim    = false;
-                t = 1;
-                console.log('Path animation complete!');
-            } else {
-                t = segmentElapsed / segmentDurations[segmentIndex];
-                console.log(`Arrived at waypoint ${segmentIndex}`);
+        function showSlide(n) {
+            const slides = document.getElementsByClassName('slide');
+            const dots = document.getElementsByClassName('dot');
+            
+            if (n > slides.length) { slideIndex = 1; }
+            if (n < 1) { slideIndex = slides.length; }
+            
+            // Hide all slides
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].classList.remove('active');
             }
+            
+            // Remove active class from all dots
+            for (let i = 0; i < dots.length; i++) {
+                dots[i].classList.remove('active');
             }
-
-            // 3) interpolate position & rotation for this leg
-            const A = pathData[segmentIndex];
-            const B = pathData[segmentIndex + 1] || A;
-            // position
-            board.position.lerpVectors(A.position, B.position, t);
-
-            // rotation via quaternion slerp
-            const qa = new THREE.Quaternion().setFromEuler(A.rotation);
-            const qb = new THREE.Quaternion().setFromEuler(B.rotation);
-            board.quaternion.slerpQuaternions(qa, qb, t);
+            
+            // Show current slide and activate corresponding dot
+            slides[slideIndex - 1].classList.add('active');
+            dots[slideIndex - 1].classList.add('active');
         }
 
-        // update controls & render
-        orbit.update();
-        renderer.render(scene, camera);
-    }
+        function changeSlide(n) {
+            slideIndex += n;
+            showSlide(slideIndex);
+        }
 
-    animate();
+        function currentSlide(n) {
+            slideIndex = n;
+            showSlide(slideIndex);
+        }
 
-    // — Handle resize —
-    window.addEventListener('resize', () => {
-        camera.aspect = innerWidth/innerHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(innerWidth, innerHeight);
-    });
-  </script>
-  <script>
-        // function getInterpolatedTransform(progress) {
-    //     // Clamp progress between 0 and 1
-    //     progress = Math.max(0, Math.min(1, progress));
+        // Keyboard navigation
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowLeft') {
+                changeSlide(-1);
+            } else if (event.key === 'ArrowRight') {
+                changeSlide(1);
+            }
+        });
+
+        // Touch/swipe support for mobile
+        let startX = 0;
+        let endX = 0;
+
+        document.addEventListener('touchstart', function(event) {
+            startX = event.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', function(event) {
+            endX = event.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            const threshold = 50;
+            const diff = startX - endX;
+            
+            if (Math.abs(diff) > threshold) {
+                if (diff > 0) {
+                    changeSlide(1);
+                } else {
+                    changeSlide(-1);
+                }
+            }
+        }
+    </script>
+    <script>
+        // Movement patterns for each piece
+        const movementPatterns = {
+        1: { // King
+            title: "How the King Moves",
+            piece: "♔",
+            position: [3, 3],
+            moves: [[2,2],[2,3],[2,4],[3,2],[3,4],[4,2],[4,3],[4,4]],
+            attacks: []
+        },
+        2: { // Queen
+            title: "How the Queen Moves",
+            piece: "♕",
+            position: [3, 3],
+            moves: [
+            [0,3],[1,3],[2,3],[4,3],[5,3],[6,3],[7,3], // vertical
+            [3,0],[3,1],[3,2],[3,4],[3,5],[3,6],[3,7], // horizontal
+            [0,0],[1,1],[2,2],[4,4],[5,5],[6,6],[7,7], // diagonal 1
+            [0,6],[1,5],[2,4],[4,2],[5,1],[6,0] // diagonal 2
+            ],
+            attacks: []
+        },
+        3: { // Rook
+            title: "How the Rook Moves",
+            piece: "♖",
+            position: [3, 3],
+            moves: [
+            [0,3],[1,3],[2,3],[4,3],[5,3],[6,3],[7,3], // vertical
+            [3,0],[3,1],[3,2],[3,4],[3,5],[3,6],[3,7] // horizontal
+            ],
+            attacks: []
+        },
+        4: { // Bishop
+            title: "How the Bishop Moves",
+            piece: "♗",
+            position: [3, 3],
+            moves: [
+            [0,0],[1,1],[2,2],[4,4],[5,5],[6,6],[7,7], // diagonal 1
+            [0,6],[1,5],[2,4],[4,2],[5,1],[6,0] // diagonal 2
+            ],
+            attacks: []
+        },
+        5: { // Knight
+            title: "How the Knight Moves",
+            piece: "♘",
+            position: [3, 3],
+            moves: [[1,2],[1,4],[2,1],[2,5],[4,1],[4,5],[5,2],[5,4]],
+            attacks: []
+        },
+        6: { // Pawn
+            title: "How the Pawn Moves",
+            piece: "♙",
+            position: [5, 3],
+            moves: [[4,3],[3,3]], // forward moves (including initial two-square move)
+            attacks: [[4,2],[4,4]] // diagonal attacks
+        }
+        };
+
+        function createBoard() {
+        const board = document.getElementById('movement-board');
+        board.innerHTML = '';
         
-    //     // Calculate which segment we're in and local progress within that segment
-    //     const segmentCount = pathData.length - 1;
-    //     const segmentProgress = progress * segmentCount;
-    //     const segmentIndex = Math.floor(segmentProgress);
-    //     const localProgress = segmentProgress - segmentIndex;
+        for (let row = 0; row < 8; row++) {
+            const boardRow = document.createElement('div');
+            boardRow.className = 'board-row';
+            
+            for (let col = 0; col < 8; col++) {
+            const square = document.createElement('div');
+            square.className = `board-square ${(row + col) % 2 === 0 ? 'light' : 'dark'}`;
+            square.dataset.row = row;
+            square.dataset.col = col;
+            boardRow.appendChild(square);
+            }
+            
+            board.appendChild(boardRow);
+        }
+        }
+
+        function updateMovementDisplay() {
+        const pattern = movementPatterns[slideIndex];
+        if (!pattern) return;
         
-    //     // Handle end case
-    //     if (segmentIndex >= segmentCount) {
-    //     //   return {
-    //     //     position: pathData[pathData.length - 1].position.clone(),
-    //     //     rotation: pathData[pathData.length - 1].rotation.clone()
-    //     //   };
-    //         const last = pathData[ pathData.length - 1 ];
-    //         return {
-    //             position: last.position.clone(),
-    //             rotation: new THREE.Quaternion().setFromEuler( last.rotation )
-    //         };
-    //     }
+        // Update title
+        document.getElementById('movement-title').textContent = pattern.title;
         
-    //     // Get current and next waypoints
-    //     const currentPoint = pathData[segmentIndex];
-    //     const nextPoint = pathData[segmentIndex + 1];
+        // Clear all special classes
+        const squares = document.querySelectorAll('.board-square');
+        squares.forEach(square => {
+            square.classList.remove('piece-position', 'possible-move', 'attack-move');
+            square.textContent = '';
+        });
         
-    //     // Interpolate position
-    //     const position = new THREE.Vector3().lerpVectors(
-    //     currentPoint.position, 
-    //     nextPoint.position, 
-    //     localProgress
-    //     );
+        // Add piece to its position
+        const pieceSquare = document.querySelector(`[data-row="${pattern.position[0]}"][data-col="${pattern.position[1]}"]`);
+        if (pieceSquare) {
+            pieceSquare.classList.add('piece-position');
+            pieceSquare.textContent = pattern.piece;
+        }
         
-    //     // Interpolate rotation using quaternions for smooth rotation
-    //     const currentQuat = new THREE.Quaternion().setFromEuler(currentPoint.rotation);
-    //     const nextQuat = new THREE.Quaternion().setFromEuler(nextPoint.rotation);
-    //     const rotation = new THREE.Quaternion().slerpQuaternions(currentQuat, nextQuat, localProgress);
+        // Add possible moves
+        pattern.moves.forEach(([row, col]) => {
+            const square = document.querySelector(`[data-row="${row}"][data-col="${col}"]`);
+            if (square) {
+            square.classList.add('possible-move');
+            }
+        });
         
-    //     return { position, rotation };
-    // }
-  </script>
+        // Add attack moves
+        pattern.attacks.forEach(([row, col]) => {
+            const square = document.querySelector(`[data-row="${row}"][data-col="${col}"]`);
+            if (square) {
+            square.classList.add('attack-move');
+            }
+        });
+        }
+
+        // Update the existing showSlide function to include movement display
+        function showSlide(n) {
+        const slides = document.getElementsByClassName('slide');
+        const dots = document.getElementsByClassName('dot');
+        
+        if (n > slides.length) { slideIndex = 1; }
+        if (n < 1) { slideIndex = slides.length; }
+        
+        // Hide all slides
+        for (let i = 0; i < slides.length; i++) {
+            slides[i].classList.remove('active');
+        }
+        
+        // Remove active class from all dots
+        for (let i = 0; i < dots.length; i++) {
+            dots[i].classList.remove('active');
+        }
+        
+        // Show current slide and activate corresponding dot
+        slides[slideIndex - 1].classList.add('active');
+        dots[slideIndex - 1].classList.add('active');
+        
+        // Update movement display
+        updateMovementDisplay();
+        }
+
+        // Initialize board when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+        createBoard();
+        updateMovementDisplay();
+        });
+    </script>
 </body>
 </html>

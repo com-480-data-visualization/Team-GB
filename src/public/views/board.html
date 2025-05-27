@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Chess Insights - The Board</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/favicon/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/svg+xml" href="images/favicon/favicon.svg">
+    <link rel="shortcut icon" href="images/favicon/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-touch-icon.png">
+    <link rel="manifest" href="images/favicon/site.webmanifest">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <!-- CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles/style.css">
+    <style>
+      .hero-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 4.0rem;
+        font-weight: 400;
+        color: white;
+        margin-bottom: 1.5rem;
+        letter-spacing: -0.02em;
+        line-height: 1.1;
+      }
+      .hero-subtitle {
+        font-size: 1.1rem;
+        color: #666;
+        font-weight: 300;
+        letter-spacing: 0.02em;
+        max-width: 500px;
+        margin: 0 auto;
+      }      
+      #board-container {
+        width: 100%;
+        min-height: 900px;
+        position: relative;
+      }
+      #board-container canvas {
+        position: absolute;
+        width: 100%  !important;
+        height: 100% !important;
+        top: 0;
+        left: 0;
+      }
+    </style>
+    <!-- JS -->
+    <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/plotly.js-dist@2.24.1/plotly.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chess.js@1.0.0-beta.6/dist/chess.min.js"></script>
+    <script type="importmap">
+        {
+          "imports": {
+            "three":  "https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.module.js",
+            "three/": "https://cdn.jsdelivr.net/npm/three@0.158.0/"
+          }
+        }
+    </script>
+</head>
+<body>
+    <nav>
+      <div class="nav-container">
+          <a href="/" class="logo">
+            <img src="images/logo.svg" alt="Chess Insights Logo">
+            <span class="logo-text">Chess Insights</span>
+          </a>
+          <div class="nav-links">
+              <a href="/#dashboard" class="nav-link">Dashboard</a>
+              <a href="/board" class="nav-link">Board</a>
+              <a href="/pieces" class="nav-link">Pieces</a>
+              <a href="/#player-stats" class="nav-link">Player Stats</a>
+              <a href="/#game-analysis" class="nav-link">Game Analysis</a>
+              <a href="/#opening-explorer" class="nav-link">Opening Explorer</a>
+              <a href="/#about" class="nav-link">About</a>
+          </div>
+          <button class="mobile-menu-button" id="mobile-menu-button">
+              <i class="fas fa-bars"></i>
+          </button>
+      </div>
+      <div class="mobile-menu" id="mobile-menu">
+          <a href="/#dashboard" class="mobile-nav-link">Dashboard</a>
+          <a href="/board" class="mobile-nav-link">Board</a>
+          <a href="/pieces" class="mobile-nav-link">Pieces</a>
+          <a href="/#player-stats" class="mobile-nav-link">Player Stats</a>
+          <a href="/#game-analysis" class="mobile-nav-link">Game Analysis</a>
+          <a href="/#opening-explorer" class="mobile-nav-link">Opening Explorer</a>
+          <a href="/#about" class="mobile-nav-link">About</a>
+      </div>
+  </nav>
+
+  <section id="home-board" class="relative">
+    <!-- pt-1 -->
+    <div id="board-title" class="absolute inset-x-0 left-20 top-20 z-10 text-center">
+      <h1 class="hero-title">Move the board around!</h1>
+      <!-- <p class="hero-subtitle">Discover the unique roles and movements of each chess piece</p> -->
+    </div>
+    <div id="board-container" class="w-full h-96"></div>
+  </section>
+  
+
+  <script type="module">
+    import * as THREE            from 'three';
+    import { GLTFLoader }        from 'three/examples/jsm/loaders/GLTFLoader.js';
+    import { OrbitControls }     from 'three/examples/jsm/controls/OrbitControls.js';
+
+    // — Scene / Camera / Renderer —
+    // const scene    = new THREE.Scene();
+    // const camera   = new THREE.PerspectiveCamera( 60, innerWidth/innerHeight, 0.1, 1000 );
+    // camera.position.set(0, 10, 16);
+    // camera.rotation.set(
+    //     THREE.MathUtils.degToRad(-25), 0, 0
+    // );
+    // const renderer = new THREE.WebGLRenderer({ antialias: true });
+    // renderer.setSize(innerWidth, innerHeight);
+    // document.body.appendChild(renderer.domElement);
+
+    const container = document.getElementById('board-container');
+    const scene     = new THREE.Scene();
+
+    // 2) Camera & renderer sized to container
+    const camera = new THREE.PerspectiveCamera(
+      80,
+      container.clientWidth / container.clientHeight,
+      0.1, 100
+    );
+    camera.position.set(0, 13, 15);
+    camera.rotation.set(
+      THREE.MathUtils.degToRad(-25), 0, 0
+    );
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setSize(container.clientWidth, container.clientHeight);
+    container.appendChild(renderer.domElement);
+
+
+    /**
+     * Load the model
+     */
+    const loader = new GLTFLoader();
+    let mixer, board;
+    loader.load('../models/chess_board.glb',
+        gltf => {
+        board = gltf.scene;
+        scene.add(board);
+        if (gltf.animations.length) {
+            mixer = new THREE.AnimationMixer(board);
+            gltf.animations.forEach(clip => mixer.clipAction(clip).play());
+        }
+        },
+        xhr => console.log(`Loaded ${(xhr.loaded/xhr.total*100).toFixed(1)}%`),
+        err => console.error(err)
+    );
+
+    const orbit = new OrbitControls(camera, renderer.domElement);
+    orbit.enableDamping = true;
+
+    /**
+     * Lighting
+     */
+    const light  = new THREE.DirectionalLight(0xffffff, 1);
+    light.position.set(10, 20, 15);
+    light.target.position.set(0,0,0);
+    scene.add(light, light.target);
+
+    const pLight = new THREE.PointLight(0x88ccff, 0.8, 100);
+    pLight.position.set(0, 10, 0);
+    scene.add(pLight);
+
+  // 1) Base ambient light for overall fill
+    const ambient = new THREE.AmbientLight(0x404040, 1.5);
+    //               ↑ color      ↑ intensity
+    scene.add(ambient);
+
+    // 2) Hemisphere light for sky/ground gradient
+    const hemi = new THREE.HemisphereLight(0xffffff, 0x222222, 0.8);
+    //                        ↑ skyColor   ↑ groundColor  ↑ intensity
+    hemi.position.set(0, 50, 0);
+    scene.add(hemi);
+
+    // 3) Corner point-lights around the board
+    const cornerPositions = [
+    [ 10,  5,  10],
+    [-10,  5,  10],
+    [ 10,  5, -10],
+    [-10,  5, -10]
+    ];
+    cornerPositions.forEach(([x,y,z]) => {
+    const pl = new THREE.PointLight(0xffeecc, 0.6, 50);
+    pl.position.set(x, y, z);
+    scene.add(pl);
+    });
+
+    // 4) A rim spotlight for dramatic edge-lighting
+    const spot = new THREE.SpotLight(0xffffff, 1);
+    //                   ↑ color   ↑ intensity
+    spot.position.set(0, 15, -15);
+    spot.angle = Math.PI / 8;      // narrow cone
+    spot.penumbra = 0.3;           // soft edge
+    spot.decay = 2;
+    spot.distance = 50;
+    spot.target.position.set(0, 0, 0);
+    scene.add(spot, spot.target);
+
+    // 5) (Optional) Tiny colored points for accent
+    const accent = new THREE.PointLight(0x0066ff, 0.3, 30);
+    accent.position.set(5, 3, 0);
+    scene.add(accent);
+
+    function animate() {
+        requestAnimationFrame(animate);
+        // update controls & render
+        orbit.update();
+        renderer.render(scene, camera);
+    }
+
+    animate();
+
+    // — Handle resize —
+    window.addEventListener('resize', () => {
+        camera.aspect = innerWidth/innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(innerWidth, innerHeight);
+    });
+  </script>
+</body>
+</html>
