@@ -32,6 +32,7 @@
             </div>
             <div class="hidden md:flex space-x-6">
                 <a href="#dashboard" class="nav-link">Dashboard</a>
+                <a href="/pieces" class="nav-link">Pieces</a>
                 <a href="#player-stats" class="nav-link">Player Stats</a>
                 <a href="#game-analysis" class="nav-link">Game Analysis</a>
                 <a href="#opening-explorer" class="nav-link">Opening Explorer</a>
@@ -54,7 +55,7 @@
     </nav>
 
     <!-- Home Title -->
-    <header class="py-12 px-4 md:px-8 bg-white">
+    <!-- <header class="py-12 px-4 md:px-8 bg-white">
         <div class="container mx-auto text-center">
           <h1 class="text-4xl md:text-5xl font-bold mb-4 text-black">Chess Data Visualization</h1>
           <p class="text-xl md:text-2xl max-w-3xl mx-auto mb-8 text-black">
@@ -65,7 +66,39 @@
             <a href="#about" class="bg-transparent border-2 border-black text-black hover:text-blue-500 hover:border-blue-500 px-6 py-3 rounded-lg font-medium transition">Learn More</a>
           </div>
         </div>
-    </header>
+    </header> -->
+
+    <!-- py-16 -->
+    <!-- <section id="home-board" class="chess-board-interactive"> 
+        <div id="board-container" class="chess-board-container"></div>
+    </section> -->
+
+
+    <section id="home-board" class="chess-board-interactive">
+        <div id="board-container" class="chess-board-container"></div>
+      
+        <header id="home-header" class="home-header">
+          <div class="container mx-auto text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4 text-white">
+              Chess Data Visualization
+            </h1>
+            <p class="text-xl md:text-2xl max-w-3xl mx-auto mb-8 text-white">
+              Exploring 20,000+ Lichess games through interactive visualizations and insightful analysis
+            </p>
+            <div class="flex justify-center space-x-4">
+              <a href="#dashboard"
+                 class="bg-white text-black border border-gray-300 hover:text-blue-500 hover:border-blue-500 px-6 py-3 rounded-lg font-medium transition">
+                Explore Dashboard
+              </a>
+              <a href="#about"
+                 class="bg-transparent border-2 border-white text-white hover:text-blue-500 hover:border-blue-500 px-6 py-3 rounded-lg font-medium transition">
+                Learn More
+              </a>
+            </div>
+          </div>
+        </header>
+    </section>
+      
 
     <!-- Intro Section -->
     <section id="about" class="py-16 px-4">
@@ -444,5 +477,14 @@
     <script src="scripts/opening-explorer.js"></script>
     <script src="scripts/network-graph.js"></script>
     <script src="scripts/heatmap.js"></script> -->
+    <script type="importmap">
+        {
+          "imports": {
+            "three":  "https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.module.js",
+            "three/": "https://cdn.jsdelivr.net/npm/three@0.158.0/"
+          }
+        }
+    </script>
+    <script type="module" src="./scripts/chess-board.js"></script>
 </body>
 </html>
