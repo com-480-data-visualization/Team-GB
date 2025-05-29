@@ -1,6 +1,6 @@
 # Project of Data Visualization (COM-480) - exploring chess world
 
-# Team members:
+## Team members:
 
 | Student's name | SCIPER |
 | -------------- | ------ |
