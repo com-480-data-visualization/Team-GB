@@ -32,24 +32,29 @@ However, for those interested in the implementation details, the complete codeba
 
 ### Project Structure
 
-📁 data/              # Preprocessed dataset
+📁 data/              # Preprocessed dataset used for visualizations
 📁 images/            # Images used in the documentation or on the website
-📁 src/
-│   ├── public/       # Main frontend files served to the browser
-│   │   ├── images/   # Static assets
-│   │   ├── models/   # JSON models or processed data used by visualizations
-│   │   ├── scripts/  # JavaScript files for interactive visualizations (D3.js)
-│   │   ├── styles/   # CSS stylesheets
-│   │   ├── views/    # HTML content for subpages
-│   │   └── index.html, 404.html, robots.txt
-│   ├── Dockerfile    # Configuration for containerized deployment
-│   ├── index.js      # Entry point for the Node.js server
-│   ├── server.js     # Server setup for hosting static files
-│   └── package.json  # Node project dependencies
-📄 .gitignore
-📄 LICENSE
-📄 README.md
-📄 captain-definition (server configuration metadata)
+📁 src/               # Source code and server
+│
+├── 📁 public/        # Main frontend files served to the browser
+│   ├── 📁 images/    # Static assets (icons, logos, etc.)
+│   ├── 📁 models/    # JSON data files used by D3.js
+│   ├── 📁 scripts/   # JavaScript visualizations (built with D3.js)
+│   ├── 📁 styles/    # CSS stylesheets
+│   ├── 📁 views/     # HTML content for additional pages/tabs
+│   ├── 404.html
+│   ├── index.html
+│   └── robots.txt
+│
+├── Dockerfile        # Configuration for Docker deployment
+├── index.js          # Entry point for the Node.js application
+├── server.js         # Express.js server setup
+├── package.json      # Project dependencies and scripts
+├── .gitignore
+├── LICENSE
+├── README.md
+└── captain-definition # Server configuration metadata
+
 
 
 
