@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chess Basics | Chess Insights</title>
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700&display=swap" rel="stylesheet">
+  <link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/pieces-style.css">
+  <link rel="stylesheet" href="../styles/style.css">
+</head>
+<body>
+    <!-- Header Nav -->
+    <nav>
+        <div class="nav-container">
+        <a href="../index.html" class="logo">
+            <img src="../images/logo.svg" alt="Chess Insights Logo">
+            <span class="logo-text">Chess Insights</span>
+        </a>
+        <div class="nav-links">
+            <div class="nav-item">
+            <a href="../index.html" class="nav-link">Game Overview <span class="dropdown-arrow">▾</span></a>
+            <div class="dropdown-menu">
+                <a href="../index.html#overview" class="dropdown-link">Overview</a>
+                <a href="../index.html#recent-games" class="dropdown-link">Recent Games</a>
+                <a href="../index.html#trends" class="dropdown-link">Performance Trends</a>
+                <a href="../index.html#ratings" class="dropdown-link">Rating History</a>
+                <a href="../index.html#quick-stats" class="dropdown-link">Quick Stats</a>
+                <a href="../index.html#study-goals" class="dropdown-link">Study Goals</a>
+            </div>
+            </div>
+
+            <div class="nav-item">
+            <a href="game-analysis.html" class="nav-link">Game Analysis <span class="dropdown-arrow">▾</span></a>
+            <div class="dropdown-menu">
+                <a href="game-analysis.html#analyze" class="dropdown-link">Analyze Game</a>
+                <a href="game-analysis.html#player-stats" class="dropdown-link">Player Statistics</a>
+                <a href="game-analysis.html#openings" class="dropdown-link">Opening Explorer</a>
+                <a href="game-analysis.html#engine-analysis" class="dropdown-link">Engine Analysis</a>
+                <a href="game-analysis.html#blunder-report" class="dropdown-link">Blunder Report</a>
+            </div>
+            </div>
+
+            <div class="nav-item">
+            <a href="chess-basics.html" class="nav-link">Chess Basics <span class="dropdown-arrow">▾</span></a>
+            <div class="dropdown-menu">
+                <a href="chess-basics.html#rules" class="dropdown-link">Rules</a>
+                <a href="chess-basics.html#pieces" class="dropdown-link">Pieces</a>
+                <a href="chess-basics.html#board" class="dropdown-link">Board</a>
+                <a href="chess-basics.html#strategy" class="dropdown-link">Basic Strategy</a>
+            </div>
+            </div>
+
+            <div class="nav-item">
+            <a href="about.html" class="nav-link">About <span class="dropdown-arrow">▾</span></a>
+            <div class="dropdown-menu">
+                <a href="about.html#project" class="dropdown-link">The Project</a>
+                <a href="about.html#team" class="dropdown-link">Us</a>
+                <a href="about.html#contact" class="dropdown-link">Contact</a>
+            </div>
+            </div>
+        </div>
+        <button class="mobile-menu-button" id="mobile-menu-button">
+            <i class="fas fa-bars"></i>
+        </button>
+        </div>
+    </nav>
+
+    <!-- CONTENT -->
+    <main class="py-16 px-4">
+        <section class="content">
+        <h1 class="hero-title">Welcome to Chess Basics</h1>
+        <p class="hero-subtitle">
+            Learn the rules, understand the pieces, and master the board to start your journey in chess.
+        </p>
+        </section>
+
+        <section id="rules" class="content">
+        <h2 class="text-3xl font-bold mb-4">Rules</h2>
+        <p class="text-gray-600 max-w-3xl mx-auto">
+            Discover the fundamental rules of chess that govern how each piece moves and how the game is won.
+        </p>
+        </section>
+
+        <section id="pieces" class="content">
+        <div class="hero">
+            <h2 class="hero-title">The Pieces</h2>
+            <p class="hero-subtitle">Discover the unique roles and movements of each chess piece</p>
+        </div>
+
+        <div class="slideshow-container mt-12">
+            <!-- KING -->
+            <div class="slide active">
+            <div class="slide-content-wrapper">
+                <div class="slide-image-container">
+                <img src="../images/pieces/king.png" alt="Chess King" class="piece-image">
+                </div>
+                <div class="slide-text">
+                <h3 class="piece-name">King</h3>
+                <p class="piece-description">The most important piece on the board. The King can move one square in any direction. Losing your King means losing the game. The King must be protected at all costs and can participate in castling.</p>
+                </div>
+            </div>
+            </div>
+
+            <!-- QUEEN -->
+            <div class="slide">
+            <div class="slide-content-wrapper">
+                <div class="slide-image-container">
+                <img src="../images/pieces/queen.png" alt="Chess Queen" class="piece-image">
+                </div>
+                <div class="slide-text">
+                <h3 class="piece-name">Queen</h3>
+                <p class="piece-description">The most powerful piece, combining the movement of a Rook and Bishop. She controls large areas and is often decisive in attacks.</p>
+                </div>
+            </div>
+            </div>
+
+            <!-- ROOK -->
+            <div class="slide">
+            <div class="slide-content-wrapper">
+                <div class="slide-image-container">
+                <img src="../images/pieces/rook.png" alt="Chess Rook" class="piece-image">
+                </div>
+                <div class="slide-text">
+                <h3 class="piece-name">Rook</h3>
+                <p class="piece-description">Moves any number of squares horizontally or vertically. Rooks are especially strong in the endgame and on open files.</p>
+                </div>
+            </div>
+            </div>
+
+            <!-- BISHOP -->
+            <div class="slide">
+            <div class="slide-content-wrapper">
+                <div class="slide-image-container">
+                <img src="../images/pieces/bishop.png" alt="Chess Bishop" class="piece-image">
+                </div>
+                <div class="slide-text">
+                <h3 class="piece-name">Bishop</h3>
+                <p class="piece-description">Moves diagonally across the board. Each bishop is confined to one color and excels on open diagonals.</p>
+                </div>
+            </div>
+            </div>
+
+            <!-- KNIGHT -->
+            <div class="slide">
+            <div class="slide-content-wrapper">
+                <div class="slide-image-container">
+                <img src="../images/pieces/knight.png" alt="Chess Knight" class="piece-image">
+                </div>
+                <div class="slide-text">
+                <h3 class="piece-name">Knight</h3>
+                <p class="piece-description">Moves in an “L” shape and is the only piece that can jump over others. It’s ideal for complex positions.</p>
+                </div>
+            </div>
+            </div>
+
+            <!-- PAWN -->
+            <div class="slide">
+            <div class="slide-content-wrapper">
+                <div class="slide-image-container">
+                <img src="../images/pieces/pawn.png" alt="Chess Pawn" class="piece-image">
+                </div>
+                <div class="slide-text">
+                <h3 class="piece-name">Pawn</h3>
+                <p class="piece-description">Moves forward one square (or two from the starting rank), captures diagonally, and can promote upon reaching the last rank. Pawns are essential to structure and strategy.</p>
+                </div>
+            </div>
+            </div>
+
+            <!-- Buttons -->
+            <button class="nav-button prev" onclick="changeSlide(-1)">
+            <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="nav-button next" onclick="changeSlide(1)">
+            <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+
+        <!-- Dots -->
+        <div class="dots-container">
+            <span class="dot active" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+            <span class="dot" onclick="currentSlide(4)"></span>
+            <span class="dot" onclick="currentSlide(5)"></span>
+            <span class="dot" onclick="currentSlide(6)"></span>
+        </div>
+
+        <!-- Movement Section -->
+        <div class="movement-section mt-16">
+            <div class="movement-container">
+            <h3 class="movement-title" id="movement-title">How the King Moves</h3>
+            <div class="movement-board" id="movement-board"></div>
+            <div class="movement-legend">
+                <div class="legend-item"><div class="legend-color legend-piece"></div><span>Current Position</span></div>
+                <div class="legend-item"><div class="legend-color legend-move"></div><span>Possible Moves</span></div>
+                <div class="legend-item"><div class="legend-color legend-attack"></div><span>Attack Moves</span></div>
+            </div>
+            </div>
+        </div>
+        </section>
+
+        <section id="board" class="content">
+        <h2 class="text-3xl font-bold mb-4">Board</h2>
+        <p class="text-gray-600 max-w-3xl mx-auto">
+            Understand the layout of the board and how it influences opening strategies and control.
+        </p>
+        </section>
+
+        <section id="strategy" class="content">
+        <h2 class="text-3xl font-bold mb-4">Basic Strategy</h2>
+        <p class="text-gray-600 max-w-3xl mx-auto">
+            Dive into beginner-friendly strategies to improve your decision-making and positional play.
+        </p>
+        </section>
+    </main>
+
+  <!-- FOOTER -->
+    <!-- Footer -->
+    <footer class="py-12 px-4 bg-white text-black">
+        <div class="container mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Chess Insights</h3>
+                    <p class="text-black">
+                        An interactive data visualization project exploring chess games from Lichess.org
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Project Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="https://github.com/com-480-data-visualization/Team-GB" class="text-black hover:text-white transition">GitHub Repository</a></li>
+                        <li><a href="https://www.kaggle.com/datasets/datasnaek/chess" class="text-gray-black hover:text-white transition">Dataset Source</a></li>
+                        <!-- <li><a href="https://github.com/com-480-data-visualization/Team-GB/blob/master/README.md" class="text-gray-300 hover:text-white transition">Documentation</a></li> -->
+                        <li><a href="https://www.team-gb.org/credits" class="text-black hover:text-white transition">Credits</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Team</h3>
+                    <p class="text-gray-black">
+                        Created by TeamGB for the Data Visualization Course
+                    </p>
+                    <div class="mt-4 flex space-x-4">
+                        <a href="https://github.com/com-480-data-visualization/Team-GB" class="text-black hover:text-white transition"><i class="fab fa-github fa-lg"></i></a>
+                        <!-- <a href="#" class="text-gray-300 hover:text-white transition"><i class="fab fa-linkedin fa-lg"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-white transition"><i class="fab fa-twitter fa-lg"></i></a> -->
+                    </div>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-gray-700 text-center text-black">
+                <p>&copy; 2025 TeamGB - Chess Insights. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- JS -->
+    <script>
+        function toggleMobileMenu() {
+        const menu = document.getElementById('mobileMenu');
+        menu.classList.toggle('show');
+        }
+
+        document.addEventListener('click', function(event) {
+        const menu = document.getElementById('mobileMenu');
+        const button = document.querySelector('.mobile-menu-button');
+        if (!menu.contains(event.target) && !button.contains(event.target)) {
+            menu.classList.remove('show');
+        }
+        });
+    </script>
+    
+    <script>
+        let slideIndex = 1;
+
+        function showSlide(n) {
+            const slides = document.getElementsByClassName('slide');
+            const dots = document.getElementsByClassName('dot');
+
+            if (n > slides.length) { slideIndex = 1; }
+            if (n < 1) { slideIndex = slides.length; }
+
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].classList.remove('active');
+            }
+            for (let i = 0; i < dots.length; i++) {
+                dots[i].classList.remove('active');
+            }
+
+            slides[slideIndex - 1].classList.add('active');
+            dots[slideIndex - 1].classList.add('active');
+            updateMovementDisplay();
+        }
+
+        function changeSlide(n) {
+            slideIndex += n;
+            showSlide(slideIndex);
+        }
+
+        function currentSlide(n) {
+            slideIndex = n;
+            showSlide(slideIndex);
+        }
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowLeft') changeSlide(-1);
+            else if (event.key === 'ArrowRight') changeSlide(1);
+        });
+
+        let startX = 0, endX = 0;
+
+        document.addEventListener('touchstart', function(event) {
+            startX = event.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', function(event) {
+            endX = event.changedTouches[0].screenX;
+            const diff = startX - endX;
+            if (Math.abs(diff) > 50) changeSlide(diff > 0 ? 1 : -1);
+        });
+    </script>
+
+    <script>
+        const movementPatterns = {
+            1: { title: "How the King Moves", piece: "♔", position: [3,3], moves: [[2,2],[2,3],[2,4],[3,2],[3,4],[4,2],[4,3],[4,4]], attacks: [] },
+            2: { title: "How the Queen Moves", piece: "♕", position: [3,3], moves: [[0,3],[1,3],[2,3],[4,3],[5,3],[6,3],[7,3],[3,0],[3,1],[3,2],[3,4],[3,5],[3,6],[3,7],[0,0],[1,1],[2,2],[4,4],[5,5],[6,6],[7,7],[0,6],[1,5],[2,4],[4,2],[5,1],[6,0]], attacks: [] },
+            3: { title: "How the Rook Moves", piece: "♖", position: [3,3], moves: [[0,3],[1,3],[2,3],[4,3],[5,3],[6,3],[7,3],[3,0],[3,1],[3,2],[3,4],[3,5],[3,6],[3,7]], attacks: [] },
+            4: { title: "How the Bishop Moves", piece: "♗", position: [3,3], moves: [[0,0],[1,1],[2,2],[4,4],[5,5],[6,6],[7,7],[0,6],[1,5],[2,4],[4,2],[5,1],[6,0]], attacks: [] },
+            5: { title: "How the Knight Moves", piece: "♘", position: [3,3], moves: [[1,2],[1,4],[2,1],[2,5],[4,1],[4,5],[5,2],[5,4]], attacks: [] },
+            6: { title: "How the Pawn Moves", piece: "♙", position: [5,3], moves: [[4,3],[3,3]], attacks: [[4,2],[4,4]] }
+        };
+
+        function createBoard() {
+            const board = document.getElementById('movement-board');
+            board.innerHTML = '';
+            for (let row = 0; row < 8; row++) {
+                const boardRow = document.createElement('div');
+                boardRow.className = 'board-row';
+                for (let col = 0; col < 8; col++) {
+                    const square = document.createElement('div');
+                    square.className = `board-square ${(row + col) % 2 === 0 ? 'light' : 'dark'}`;
+                    square.dataset.row = row;
+                    square.dataset.col = col;
+                    boardRow.appendChild(square);
+                }
+                board.appendChild(boardRow);
+            }
+        }
+
+        function updateMovementDisplay() {
+            const pattern = movementPatterns[slideIndex];
+            if (!pattern) return;
+
+            document.getElementById('movement-title').textContent = pattern.title;
+
+            const squares = document.querySelectorAll('.board-square');
+            squares.forEach(sq => {
+                sq.classList.remove('piece-position', 'possible-move', 'attack-move');
+                sq.textContent = '';
+            });
+
+            const pieceSquare = document.querySelector(`[data-row="${pattern.position[0]}"][data-col="${pattern.position[1]}"]`);
+            if (pieceSquare) {
+                pieceSquare.classList.add('piece-position');
+                pieceSquare.textContent = pattern.piece;
+            }
+
+            pattern.moves.forEach(([row, col]) => {
+                const sq = document.querySelector(`[data-row="${row}"][data-col="${col}"]`);
+                if (sq) sq.classList.add('possible-move');
+            });
+
+            pattern.attacks.forEach(([row, col]) => {
+                const sq = document.querySelector(`[data-row="${row}"][data-col="${col}"]`);
+                if (sq) sq.classList.add('attack-move');
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            createBoard();
+            updateMovementDisplay();
+        });
+    </script>
+
+</body>
+</html>
