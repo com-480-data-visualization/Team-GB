@@ -32,12 +32,10 @@ However, for those interested in the implementation details, the complete codeba
 
 ### Project Structure
 
-### Project Structure
-
-- `data/` – Preprocessed dataset used for visualizations  
+- `data/` – Preprocessed dataset  
 - `images/` – Images used in the documentation or on the website  
-- `src/` – Source code and server setup  
-  - `public/` – Main frontend files served to the browser  
+- `src/` – Source code
+  - `public/` – Main frontend files
     - `images/` – Static assets (icons, logos, etc.)  
     - `models/` – JSON data files used by D3.js  
     - `scripts/` – JavaScript visualizations (built with D3.js)  
