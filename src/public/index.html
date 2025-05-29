@@ -36,37 +36,112 @@
     <!-- Header Nav -->
     <nav>
         <div class="nav-container">
-            <!-- <div class="logo">
-                <img src="images/logo.svg" alt="Chess Insights Logo">
-                <span class="logo-text">Chess Insights</span>
-            </div> -->
             <a href="/" class="logo">
                 <img src="images/logo.svg" alt="Chess Insights Logo">
                 <span class="logo-text">Chess Insights</span>
-              </a>
+            </a>
             <div class="nav-links">
-                <a href="/#dashboard" class="nav-link">Dashboard</a>
-                <a href="/board" class="nav-link">Board</a>
-                <a href="/pieces" class="nav-link">Pieces</a>
-                <a href="/#player-stats" class="nav-link">Player Stats</a>
-                <a href="/#game-analysis" class="nav-link">Game Analysis</a>
-                <a href="/#opening-explorer" class="nav-link">Opening Explorer</a>
-                <a href="/#about" class="nav-link">About</a>
+                <div class="nav-item">
+                    <a href="/" class="nav-link">
+                        Dashboard
+                        <!-- <span class="dropdown-arrow">▼</span> -->
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="/#dashboard" class="dropdown-link">Overview</a>
+                        <a href="/#player-stats" class="dropdown-link">Player Stats</a>
+                        <a href="/#" class="dropdown-link">Recent Games</a>
+                        <a href="/#" class="dropdown-link">Performance Trends</a>
+                        <a href="/#" class="dropdown-link">Rating History</a>
+                    </div>
+                </div>
+                
+                <div class="nav-item">
+                    <a href="/analysis" class="nav-link">
+                        Game Analysis
+                        <!-- <span class="dropdown-arrow">▼</span> -->
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="/analysis#game-analysis" class="dropdown-link">Analyze Game</a>
+                        <a href="/analysis#" class="dropdown-link">Opening Explorer</a>
+                        <a href="/analysis#" class="dropdown-link">Engine Analysis</a>
+                        <a href="/analysis#" class="dropdown-link">Blunder Report</a>
+                        <a href="/analysis#" class="dropdown-link">Position Database</a>
+                    </div>
+                </div>
+                <div class="nav-item">
+                    <a href="/pieces" class="nav-link">Pieces</a>
+                </div>
+                <div class="nav-item">
+                    <a href="/board" class="nav-link">Board</a>
+                </div>
             </div>
-            <button class="mobile-menu-button" id="mobile-menu-button">
-                <i class="fas fa-bars"></i>
-            </button>
+            <button class="mobile-menu-button" onclick="toggleMobileMenu()">☰</button>
         </div>
-        <div class="mobile-menu" id="mobile-menu">
-            <a href="/#dashboard" class="mobile-nav-link">Dashboard</a>
-            <a href="/board" class="mobile-nav-link">Board</a>
+
+        <div class="mobile-menu" id="mobileMenu">
+            <div class="mobile-nav-item">
+                <a href="/" class="mobile-nav-link" onclick="toggleMobileDropdown('dashboard')">
+                    Dashboard
+                    <button class="mobile-toggle">▼</button>
+                </a>
+                <div class="mobile-dropdown" id="dashboard-dropdown">
+                    <a href="/#dashboard" class="mobile-dropdown-link">Overview</a>
+                    <a href="/#player-stats" class="mobile-dropdown-link">Player Stats</a>
+                    <a href="/#" class="mobile-dropdown-link">Recent Games</a>
+                    <a href="/#" class="mobile-dropdown-link">Performance Trends</a>
+                    <a href="/#" class="mobile-dropdown-link">Rating History</a>
+                </div>
+            </div>
+            <div class="mobile-nav-item">
+                <a href="/analysis" class="mobile-nav-link" onclick="toggleMobileDropdown('analysis')">
+                    Game Analysis
+                    <button class="mobile-toggle">▼</button>
+                </a>
+                <div class="mobile-dropdown" id="analysis-dropdown">
+                    <a href="/analysis#game-analysis" class="mobile-dropdown-link">Analyze Game</a>
+                    <a href="/analysis#" class="mobile-dropdown-link">Opening Explorer</a>
+                    <a href="/analysis#" class="mobile-dropdown-link">Engine Analysis</a>
+                    <a href="/analysis#" class="mobile-dropdown-link">Blunder Report</a>
+                    <a href="/analysis#" class="mobile-dropdown-link">Position Database</a>
+                </div>
+            </div>
             <a href="/pieces" class="mobile-nav-link">Pieces</a>
-            <a href="/#player-stats" class="mobile-nav-link">Player Stats</a>
-            <a href="/#game-analysis" class="mobile-nav-link">Game Analysis</a>
-            <a href="/#opening-explorer" class="mobile-nav-link">Opening Explorer</a>
-            <a href="/#about" class="mobile-nav-link">About</a>
+            <a href="/board" class="mobile-nav-link">Board</a>
         </div>
     </nav>
+    
+        <div class="mobile-menu" id="mobileMenu">
+            <div class="mobile-nav-item">
+                <a href="#" class="mobile-nav-link" onclick="toggleMobileDropdown('dashboard')">
+                    Dashboard
+                    <button class="mobile-toggle">▼</button>
+                </a>
+                <div class="mobile-dropdown" id="dashboard-dropdown">
+                    <a href="/#dashboard" class="mobile-dropdown-link">Overview</a>
+                    <a href="/#player-stats" class="mobile-dropdown-link">Player Stats</a>
+                    <a href="/#" class="mobile-dropdown-link">Recent Games</a>
+                    <a href="/#" class="mobile-dropdown-link">Performance Trends</a>
+                    <a href="/#" class="mobile-dropdown-link">Rating History</a>
+                </div>
+            </div>
+            <div class="mobile-nav-item">
+                <a href="#" class="mobile-nav-link" onclick="toggleMobileDropdown('analysis')">
+                    Game Analysis
+                    <button class="mobile-toggle">▼</button>
+                </a>
+                <div class="mobile-dropdown" id="analysis-dropdown">
+                    <a href="/analysis#game-analysis" class="mobile-dropdown-link">Analyze Game</a>
+                    <a href="/analysis#" class="mobile-dropdown-link">Opening Explorer</a>
+                    <a href="/analysis#" class="mobile-dropdown-link">Engine Analysis</a>
+                    <a href="/analysis#" class="mobile-dropdown-link">Blunder Report</a>
+                    <a href="/analysis#" class="mobile-dropdown-link">Position Database</a>
+                </div>
+            </div>
+            <a href="/pieces" class="mobile-nav-link">Pieces</a>
+            <a href="/board" class="mobile-nav-link">Board</a>
+        </div>
+    </nav>
+
     <!-- Home Title -->
     <section id="home-board" class="chess-board-interactive">
         <div id="board-container" class="chess-board-container"></div>
