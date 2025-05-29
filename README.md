@@ -25,17 +25,32 @@ Each section includes interactive and animated visualizations built with D3.js, 
 
 ## Technical Setup
 
-
-
-### Prerequisites
-
-To run this website locally, make sure you have the following installed:
-
-- [Node.js](https://nodejs.org/) (>= v16)
-- [npm](https://www.npmjs.com/) (usually installed with Node.js)
-- A local HTTP server (e.g., using `http-server`, Python's `http.server`, or any static site server)
+Our website is hosted online and publicly accessible at:
+👉 https://www.team-gb.org
+There is no need to run the project locally to explore the interactive visualizations or access the analysis. Everything is available via the live website.
+However, for those interested in the implementation details, the complete codebase is accessible in this GitHub repository. Below is the structure of the main components:
 
 ### Project Structure
+
+📁 data/              # Preprocessed dataset
+📁 images/            # Images used in the documentation or on the website
+📁 src/
+│   ├── public/       # Main frontend files served to the browser
+│   │   ├── images/   # Static assets
+│   │   ├── models/   # JSON models or processed data used by visualizations
+│   │   ├── scripts/  # JavaScript files for interactive visualizations (D3.js)
+│   │   ├── styles/   # CSS stylesheets
+│   │   ├── views/    # HTML content for subpages
+│   │   └── index.html, 404.html, robots.txt
+│   ├── Dockerfile    # Configuration for containerized deployment
+│   ├── index.js      # Entry point for the Node.js server
+│   ├── server.js     # Server setup for hosting static files
+│   └── package.json  # Node project dependencies
+📄 .gitignore
+📄 LICENSE
+📄 README.md
+📄 captain-definition (server configuration metadata)
+
 
 
 
