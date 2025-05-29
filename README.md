@@ -1,5 +1,7 @@
 # Project of Data Visualization (COM-480) - exploring chess world
 
+# Team members:
+
 | Student's name | SCIPER |
 | -------------- | ------ |
 | Fanny Missilier | 346565 |
