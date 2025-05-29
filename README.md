@@ -25,8 +25,7 @@ Each section includes interactive and animated visualizations built with D3.js, 
 
 ## Technical Setup
 
-Our website is hosted online and publicly accessible at:
-👉 https://www.team-gb.org
+Our website is publicly accessible at **[www.team-gb.org](https://www.team-gb.org)**.
 There is no need to run the project locally to explore the interactive visualizations or access the analysis. Everything is available via the live website.
 However, for those interested in the implementation details, the complete codebase is accessible in this GitHub repository. Below is the structure of the main components:
 
