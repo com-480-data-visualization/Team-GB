@@ -53,8 +53,8 @@ To run the project locally for testing or development:
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/your-username/your-repo-name.git
-cd your-repo-name
+git clone https://github.com/com-480-data-visualization/Team-GB.git
+cd Team-GB
 
 # 2. Navigate to the source folder
 cd src
