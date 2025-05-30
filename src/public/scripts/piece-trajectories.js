@@ -218,7 +218,7 @@ d3.csv("../../data/games.csv").then(function(data) {
             return "Pawn trajectory " + currentPawn.toUpperCase();
         }
         const map = {'p': 'Pawns', 'n': 'Knights', 'b': 'Bishops', 'r': 'Rooks', 'q': 'Queen', 'k': 'King'};
-        return "trajectory of the " + map[currentFilter];
+        return "Trajectory of the " + map[currentFilter];
     }
 
     function createSimpleBoard() {
