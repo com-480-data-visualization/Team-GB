@@ -130,7 +130,9 @@ d3.csv("../../data/games.csv").then(function(data) {
         const svg = container.append("svg")
             .attr("id", "trajectory-svg")
             .attr("width", width)
-            .attr("height", height);
+            .attr("height", height)
+            .style("display", "block")
+            .style("margin", "0 auto");
 
         const board = svg.append("g")
             .attr("transform", `translate(${margin}, 40)`);

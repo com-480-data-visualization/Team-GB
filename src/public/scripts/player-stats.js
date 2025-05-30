@@ -55,7 +55,7 @@ d3.csv("../../data/games.csv").then(data => {
 
     // Contenu HTML + SVG donut + barres D3.js
     results.innerHTML = `
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-4">
+      <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 mb-4">
         <div class="bg-yellow-100 p-6 rounded-xl shadow text-center">
           <svg id="donut-chart" width="120" height="120" class="mx-auto"></svg>
           <p class="text-sm uppercase tracking-wide text-yellow-700 mt-2">Win Rate</p>
@@ -149,4 +149,7 @@ d3.csv("../../data/games.csv").then(data => {
       if (id) updateStats(id);
     }
   });
+
+  // Chargement automatique d’un exemple
+  updateStats("daniel_likes_chess");
 });
