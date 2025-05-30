@@ -67,7 +67,7 @@ try {
     });
     // Uncaught Exception is when you throw an error and did not catch anywhere.
     process.on('uncaughtException', async (error) => {
-        console.loglog(`--uncaughtException--${error}`);
+        console.log(`--uncaughtException--${error}`);
         process.exit(1);
     });
     // Unhandled promise rejection is similar, when you fail to catch a Promise.reject.

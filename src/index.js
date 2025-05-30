@@ -3,9 +3,9 @@ const index = (app) => {
     "use strict";
 
     app.get('/analysis', (req, res, next) => {
-        return res.render('./views/analysis.html', {});
+        return res.render('./views/game-analysis.html', {});
     });
-    app.get('/chess-basics', (req, res, next) => {
+    app.get('/basics', (req, res, next) => {
         return res.render('./views/chess-basics.html', {});
     });
     app.get('/pieces', (req, res, next) => {
