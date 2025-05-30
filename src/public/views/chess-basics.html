@@ -22,42 +22,33 @@
         </a>
         <div class="nav-links">
             <div class="nav-item">
-            <a href="/" class="nav-link">Game Overview <span class="dropdown-arrow">▾</span></a>
+            <a href="/" class="nav-link">Game Overview</a>
             <div class="dropdown-menu">
-                <a href="/#overview" class="dropdown-link">Overview</a>
-                <a href="/#recent-games" class="dropdown-link">Recent Games</a>
-                <a href="/#trends" class="dropdown-link">Performance Trends</a>
-                <a href="/#ratings" class="dropdown-link">Rating History</a>
-                <a href="/#quick-stats" class="dropdown-link">Quick Stats</a>
-                <a href="/#study-goals" class="dropdown-link">Study Goals</a>
+                <a href="/#about" class="dropdown-link">Overview</a>
+                <a href="/#fun-facts" class="dropdown-link">Fun Facts</a>
             </div>
             </div>
-
             <div class="nav-item">
-            <a href="/analysis" class="nav-link">Game Analysis <span class="dropdown-arrow">▾</span></a>
+            <a href="/analysis" class="nav-link">Game Analysis</a>
             <div class="dropdown-menu">
-                <a href="/analysis#analyze" class="dropdown-link">Analyze Game</a>
                 <a href="/analysis#player-stats" class="dropdown-link">Player Statistics</a>
-                <a href="/analysis#openings" class="dropdown-link">Opening Explorer</a>
-                <a href="/analysis#engine-analysis" class="dropdown-link">Engine Analysis</a>
-                <a href="/analysis#blunder-report" class="dropdown-link">Blunder Report</a>
+                <a href="/analysis#heatmap" class="dropdown-link">Heat Map</a>
+                <a href="/analysis#trajectories" class="dropdown-link">Pieces Trajectories</a>
+                <a href="/analysis#analysis" class="dropdown-link">Temporal Analysis</a>
             </div>
             </div>
-
             <div class="nav-item">
-            <a href="/basics" class="nav-link">Chess Basics <span class="dropdown-arrow">▾</span></a>
+            <a href="/basics" class="nav-link">Chess Basics</a>
             <div class="dropdown-menu">
-                <a href="/basics#rules" class="dropdown-link">Rules</a>
                 <a href="/basics#pieces" class="dropdown-link">Pieces</a>
+                <a href="/basics#moves" class="dropdown-link">Moves</a>
                 <a href="/basics#board" class="dropdown-link">Board</a>
-                <a href="/basics#strategy" class="dropdown-link">Basic Strategy</a>
             </div>
             </div>
-
             <div class="nav-item">
-            <a href="/about" class="nav-link">About <span class="dropdown-arrow">▾</span></a>
+            <a href="/about" class="nav-link">About</a>
             <div class="dropdown-menu">
-                <a href="/abouttml#project" class="dropdown-link">The Project</a>
+                <a href="/about#project" class="dropdown-link">The Project</a>
                 <a href="/about#team" class="dropdown-link">Us</a>
                 <a href="/about#contact" class="dropdown-link">Contact</a>
             </div>
@@ -69,21 +60,22 @@
         </div>
     </nav>
 
+
     <!-- CONTENT -->
     <main class="py-16 px-4">
         <section class="content">
-        <h1 class="hero-title">Welcome to Chess Basics</h1>
+        <h1 class="hero-main-title">Welcome to Chess Basics</h1>
         <p class="hero-subtitle">
             Learn the rules, understand the pieces, and master the board to start your journey in chess.
         </p>
         </section>
 
-        <section id="rules" class="content">
+        <!-- <section id="rules" class="content">
         <h2 class="text-3xl font-bold mb-4">Rules</h2>
         <p class="text-gray-600 max-w-3xl mx-auto">
             Discover the fundamental rules of chess that govern how each piece moves and how the game is won.
         </p>
-        </section>
+        </section> -->
 
         <section id="pieces" class="content">
         <div class="hero">
@@ -189,8 +181,12 @@
             <span class="dot" onclick="currentSlide(6)"></span>
         </div>
 
+        <section style="padding-top: -100px; margin-top: 0;"></section>
+
+
         <!-- Movement Section -->
-        <div class="movement-section mt-16">
+        <section id="moves"></section>
+        <div class="movement-section mt-16" style="padding-top: 50px; margin-top: 0 !important; padding-bottom: 20px;">
             <div class="movement-container">
             <h3 class="movement-title" id="movement-title">How the King Moves</h3>
             <div class="movement-board" id="movement-board"></div>
@@ -203,23 +199,16 @@
         </div>
         </section>
 
-        <section id="board" class="content">
-        <h2 class="text-3xl font-bold mb-4">Board</h2>
+        <section id="board"></section>
+        <section id="board-content" class="content" style="padding-top: 0px;">
+        <h2 class="text-3xl font-bold mb-4">The Board</h2>
         <p class="text-gray-600 max-w-3xl mx-auto">
-            Understand the layout of the board and how it influences opening strategies and control.
+            Understand the layout of the board how to move your pieces by playing against the computer.
         </p>
         </section>
         <div id="myBoard" style="width: 500px; margin: 0 auto;"></div>
-        <!-- <label>Status:</label>
-        <div id="status"></div> -->
-        <!-- <label>FEN:</label>
-        <div id="fen"></div>
-        <label>PGN:</label>
-        <div id="pgn"></div> -->
     </main>
     
-
-  <!-- FOOTER -->
     <!-- Footer -->
     <footer class="py-12 px-4 bg-white text-black">
         <div class="container mx-auto">
@@ -233,10 +222,10 @@
                 <div>
                     <h3 class="text-lg font-semibold mb-4">Project Links</h3>
                     <ul class="space-y-2">
-                        <li><a href="https://github.com/com-480-data-visualization/Team-GB" class="text-black hover:text-white transition">GitHub Repository</a></li>
-                        <li><a href="https://www.kaggle.com/datasets/datasnaek/chess" class="text-gray-black hover:text-white transition">Dataset Source</a></li>
+                        <li><a href="https://github.com/com-480-data-visualization/Team-GB" class="footer-link">GitHub Repository</a></li>
+                        <li><a href="https://www.kaggle.com/datasets/datasnaek/chess" class="footer-link">Dataset Source</a></li>
                         <!-- <li><a href="https://github.com/com-480-data-visualization/Team-GB/blob/master/README.md" class="text-gray-300 hover:text-white transition">Documentation</a></li> -->
-                        <li><a href="https://www.team-gb.org/credits" class="text-black hover:text-white transition">Credits</a></li>
+                        <li><a href="https://www.team-gb.org/credits" class="footer-link">Credits</a></li>
                     </ul>
                 </div>
                 <div>
@@ -245,7 +234,7 @@
                         Created by TeamGB for the Data Visualization Course
                     </p>
                     <div class="mt-4 flex space-x-4">
-                        <a href="https://github.com/com-480-data-visualization/Team-GB" class="text-black hover:text-white transition"><i class="fab fa-github fa-lg"></i></a>
+                        <a href="https://github.com/com-480-data-visualization/Team-GB" class="footer-link"><i class="fab fa-github fa-lg"></i></a>
                         <!-- <a href="#" class="text-gray-300 hover:text-white transition"><i class="fab fa-linkedin fa-lg"></i></a>
                         <a href="#" class="text-gray-300 hover:text-white transition"><i class="fab fa-twitter fa-lg"></i></a> -->
                     </div>
@@ -258,21 +247,6 @@
     </footer>
     
     <!-- JS -->
-    <!-- <script>
-        function toggleMobileMenu() {
-        const menu = document.getElementById('mobileMenu');
-        menu.classList.toggle('show');
-        }
-
-        document.addEventListener('click', function(event) {
-        const menu = document.getElementById('mobileMenu');
-        const button = document.querySelector('.mobile-menu-button');
-        if (!menu.contains(event.target) && !button.contains(event.target)) {
-            menu.classList.remove('show');
-        }
-        });
-    </script> -->
-    
     <script>
         let slideIndex = 1;
 

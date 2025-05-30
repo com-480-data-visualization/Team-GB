@@ -21,10 +21,7 @@
 .chess-board-container {
   position: relative;
   width: 100%;
-  /* OPTION A: fixed height */
   height: 800px;
-  /* OPTION B: responsive aspect-ratio (16:9) */
-  /* padding-bottom: 56.25%; */
 }
 .chess-board-container canvas {
   position: absolute;
@@ -50,4 +47,24 @@
   opacity: 1;
   transform: translate(-50%, -50%) translateY(0);
   pointer-events: auto;
+}
+
+.hero-title {
+  font-family: 'Clash Display', sans-serif;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 3.5rem;
+  color: #ffffff;
+  letter-spacing: 0.05em;
+  margin-bottom: 1rem;
+}
+
+.hero-subtitle {
+  font-family: 'Satoshi', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 300;
+  color: #ffffff;
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.6;
 }

@@ -21,226 +21,7 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="./styles/style.css">
     <link rel="stylesheet" href="./styles/home-style.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Georgia', serif;
-            line-height: 1.6;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-            color: #fff;
-            overflow-x: hidden;
-        }
-
-        .hero {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            position: relative;
-            background: radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, transparent 70%);
-        }
-
-        .hero::before {
-            content: '♛♜♝♞♚♟';
-            position: absolute;
-            top: 20%;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 4rem;
-            opacity: 0.2;
-            animation: float 6s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateX(-50%) translateY(0px); }
-            50% { transform: translateX(-50%) translateY(-20px); }
-        }
-
-        .hero h1 {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(45deg, #ffd700, #ffed4e, #fff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: shimmer 3s ease-in-out infinite;
-        }
-
-        @keyframes shimmer {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.8; }
-        }
-
-        .hero p {
-            font-size: 1.5rem;
-            opacity: 0.9;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .facts-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            padding: 4rem 0;
-        }
-
-        .fact-card {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 2rem;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .fact-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-            transition: left 0.5s;
-        }
-
-        .fact-card:hover::before {
-            left: 100%;
-        }
-
-        .fact-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-            border-color: rgba(255,215,0,0.5);
-        }
-
-        .fact-number {
-            font-size: 3rem;
-            font-weight: bold;
-            color: #ffd700;
-            margin-bottom: 1rem;
-            display: block;
-        }
-
-        .fact-title {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: #fff;
-            font-weight: bold;
-        }
-
-        .fact-description {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            opacity: 0.9;
-        }
-
-        .chess-piece {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            font-size: 2rem;
-            opacity: 0.3;
-            transition: all 0.3s ease;
-        }
-
-        .fact-card:hover .chess-piece {
-            opacity: 0.6;
-            transform: rotate(15deg);
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 3rem;
-            margin: 4rem 0 2rem;
-            background: linear-gradient(45deg, #ffd700, #ffed4e);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .interactive-board {
-            display: grid;
-            grid-template-columns: repeat(8, 1fr);
-            gap: 2px;
-            max-width: 400px;
-            margin: 2rem auto;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-
-        .square {
-            aspect-ratio: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .square.light {
-            background: #f0d9b5;
-            color: #8b4513;
-        }
-
-        .square.dark {
-            background: #b58863;
-            color: #fff;
-        }
-
-        .square:hover {
-            transform: scale(1.1);
-            z-index: 10;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-        }
-
-        .footer {
-            text-align: center;
-            padding: 4rem 0;
-            background: rgba(0,0,0,0.3);
-            margin-top: 4rem;
-        }
-
-        .scroll-indicator {
-            position: fixed;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            animation: bounce 2s infinite;
-            font-size: 2rem;
-            opacity: 0.7;
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
-            40% { transform: translateX(-50%) translateY(-10px); }
-            60% { transform: translateX(-50%) translateY(-5px); }
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 2.5rem; }
-            .hero p { font-size: 1.2rem; }
-            .facts-grid { grid-template-columns: 1fr; }
-            .container { padding: 0 1rem; }
-        }
-    </style>
+    <link rel="stylesheet" href="./styles/fun-facts.css">
     <!-- JS -->
     <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/plotly.js-dist@2.24.1/plotly.min.js"></script>
@@ -264,42 +45,33 @@
         </a>
         <div class="nav-links">
             <div class="nav-item">
-            <a href="/" class="nav-link">Game Overview <span class="dropdown-arrow">▾</span></a>
+            <a href="/" class="nav-link">Game Overview</a>
             <div class="dropdown-menu">
-                <a href="/#overview" class="dropdown-link">Overview</a>
-                <a href="/#recent-games" class="dropdown-link">Recent Games</a>
-                <a href="/#trends" class="dropdown-link">Performance Trends</a>
-                <a href="/#ratings" class="dropdown-link">Rating History</a>
-                <a href="/#quick-stats" class="dropdown-link">Quick Stats</a>
-                <a href="/#study-goals" class="dropdown-link">Study Goals</a>
+                <a href="/#about" class="dropdown-link">Overview</a>
+                <a href="/#fun-facts" class="dropdown-link">Fun Facts</a>
             </div>
             </div>
-
             <div class="nav-item">
-            <a href="/analysis" class="nav-link">Game Analysis <span class="dropdown-arrow">▾</span></a>
+            <a href="/analysis" class="nav-link">Game Analysis</a>
             <div class="dropdown-menu">
-                <a href="/analysis#analyze" class="dropdown-link">Analyze Game</a>
                 <a href="/analysis#player-stats" class="dropdown-link">Player Statistics</a>
-                <a href="/analysis#openings" class="dropdown-link">Opening Explorer</a>
-                <a href="/analysis#engine-analysis" class="dropdown-link">Engine Analysis</a>
-                <a href="/analysis#blunder-report" class="dropdown-link">Blunder Report</a>
+                <a href="/analysis#heatmap" class="dropdown-link">Heat Map</a>
+                <a href="/analysis#trajectories" class="dropdown-link">Pieces Trajectories</a>
+                <a href="/analysis#analysis" class="dropdown-link">Temporal Analysis</a>
             </div>
             </div>
-
             <div class="nav-item">
-            <a href="/basics" class="nav-link">Chess Basics <span class="dropdown-arrow">▾</span></a>
+            <a href="/basics" class="nav-link">Chess Basics</a>
             <div class="dropdown-menu">
-                <a href="/basics#rules" class="dropdown-link">Rules</a>
                 <a href="/basics#pieces" class="dropdown-link">Pieces</a>
+                <a href="/basics#moves" class="dropdown-link">Moves</a>
                 <a href="/basics#board" class="dropdown-link">Board</a>
-                <a href="/basics#strategy" class="dropdown-link">Basic Strategy</a>
             </div>
             </div>
-
             <div class="nav-item">
-            <a href="/about" class="nav-link">About <span class="dropdown-arrow">▾</span></a>
+            <a href="/about" class="nav-link">About</a>
             <div class="dropdown-menu">
-                <a href="/abouttml#project" class="dropdown-link">The Project</a>
+                <a href="/about#project" class="dropdown-link">The Project</a>
                 <a href="/about#team" class="dropdown-link">Us</a>
                 <a href="/about#contact" class="dropdown-link">Contact</a>
             </div>
@@ -310,39 +82,41 @@
         </button>
         </div>
     </nav>
+
     <!-- Home Title -->
-<section id="home-board" class="chess-board-interactive">
-  <div id="board-container" class="chess-board-container"></div>
+    <section id="home-board" class="chess-board-interactive">
+    <div id="board-container" class="chess-board-container"></div>
 
-  <div class="scroll-down">
-    ↓ Click here to see more
-  </div>
-
-<header id="home-header" class="home-header">
-  <div class="container mx-auto text-center">
-    <h1 class="hero-title">
-      CHESS DATA Visualization
-    </h1>
-    <p class="hero-subtitle">
-      Exploring 20,000+ Lichess games through interactive visualizations and insightful analysis
-    </p>
-    <div class="flex justify-center space-x-4 mt-8">
-      <a href="#dashboard"
-         class="bg-white text-black border border-gray-300 hover:text-black px-6 py-3 rounded-lg font-medium transition">
-        Explore Dashboard
-      </a>
-      <a href="#about"
-         class="bg-transparent border-2 border-white text-white hover:text-gray-300 px-6 py-3 rounded-lg font-medium transition">
-        Learn More
-      </a>
+    <div class="scroll-down">
+        ↓ Scroll down to see more
     </div>
-  </div>
-</header>
+
+    <header id="home-header" class="home-header">
+        <div class="container mx-auto text-center">
+            <h1 class="hero-title">
+            CHESS DATA Visualization
+            </h1>
+            <p class="hero-subtitle">
+            Exploring 20,000+ Lichess games through interactive visualizations and insightful analysis
+            </p>
+            <div class="flex justify-center space-x-4 mt-8">
+            <a href="/analysis"
+                class="bg-white text-black border border-gray-300 hover:text-black px-6 py-3 rounded-lg font-medium transition">
+                Explore Dashboard
+            </a>
+            <a href="#about"
+                class="bg-transparent border-2 border-white text-white hover:text-gray-300 px-6 py-3 rounded-lg font-medium transition">
+                Learn More
+            </a>
+            </div>
+        </div>
+    </header>
     
     <!-- WIP from here -->
       
     <!-- Intro Section -->
-    <section id="about" class="py-16 px-4 bg-white text-black">
+    <section id="about" style="padding-top: 40px;"></section>
+    <section id="about-content" class="py-16 px-4 bg-white text-black" style="padding-bottom: 40px;">
         <div class="container mx-auto">
             <div class="text-center mb-12">
                 <h2 class="text-3xl font-bold mb-4">About The Project</h2>
@@ -375,8 +149,9 @@
     </section>
     
     <!-- End of WIP -->
+    <section id="fun-facts"></section>
 
-    <div class="container">
+    <div class="fun-facts-container">
         <h2 class="section-title">Fun Facts</h2>
         
         <div class="facts-grid">
@@ -442,10 +217,10 @@
                 <div>
                     <h3 class="text-lg font-semibold mb-4">Project Links</h3>
                     <ul class="space-y-2">
-                        <li><a href="https://github.com/com-480-data-visualization/Team-GB" class="text-black hover:text-white transition">GitHub Repository</a></li>
-                        <li><a href="https://www.kaggle.com/datasets/datasnaek/chess" class="text-gray-black hover:text-white transition">Dataset Source</a></li>
+                        <li><a href="https://github.com/com-480-data-visualization/Team-GB" class="footer-link">GitHub Repository</a></li>
+                        <li><a href="https://www.kaggle.com/datasets/datasnaek/chess" class="footer-link">Dataset Source</a></li>
                         <!-- <li><a href="https://github.com/com-480-data-visualization/Team-GB/blob/master/README.md" class="text-gray-300 hover:text-white transition">Documentation</a></li> -->
-                        <li><a href="https://www.team-gb.org/credits" class="text-black hover:text-white transition">Credits</a></li>
+                        <li><a href="https://www.team-gb.org/credits" class="footer-link">Credits</a></li>
                     </ul>
                 </div>
                 <div>
@@ -454,7 +229,7 @@
                         Created by TeamGB for the Data Visualization Course
                     </p>
                     <div class="mt-4 flex space-x-4">
-                        <a href="https://github.com/com-480-data-visualization/Team-GB" class="text-black hover:text-white transition"><i class="fab fa-github fa-lg"></i></a>
+                        <a href="https://github.com/com-480-data-visualization/Team-GB" class="footer-link"><i class="fab fa-github fa-lg"></i></a>
                         <!-- <a href="#" class="text-gray-300 hover:text-white transition"><i class="fab fa-linkedin fa-lg"></i></a>
                         <a href="#" class="text-gray-300 hover:text-white transition"><i class="fab fa-twitter fa-lg"></i></a> -->
                     </div>
@@ -465,6 +240,7 @@
             </div>
         </div>
     </footer>
+
 
     <!-- JS Files -->
     <script type="module" src="./scripts/chess-board.js"></script>
