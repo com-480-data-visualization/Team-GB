@@ -2,12 +2,12 @@ d3.csv("../../data/games.csv").then(function(data) {
     console.log("Données chargées:", data.length, "parties");
 
     const pieces = [
-        {key: 'p', name: 'Pions', color: '#e74c3c'},
-        {key: 'n', name: 'Cavaliers', color: '#3498db'},
-        {key: 'b', name: 'Fous', color: '#2ecc71'},
-        {key: 'r', name: 'Tours', color: '#e67e22'},
-        {key: 'q', name: 'Dame', color: '#f39c12'},
-        {key: 'k', name: 'Roi', color: '#9b59b6'}
+        {key: 'p', name: 'Pawns', color: '#e74c3c'},
+        {key: 'n', name: 'Knights', color: '#3498db'},
+        {key: 'b', name: 'Bishops', color: '#2ecc71'},
+        {key: 'r', name: 'Rooks', color: '#e67e22'},
+        {key: 'q', name: 'Queen', color: '#f39c12'},
+        {key: 'k', name: 'King', color: '#9b59b6'}
     ];
 
     const games = data.slice(0, 400);
@@ -76,7 +76,7 @@ d3.csv("../../data/games.csv").then(function(data) {
         pawnControls.append("p")
             .style("margin", "10px 0 5px 0")
             .style("color", "#495057")
-            .text("Pions individuels :");
+            .text("Lone pawn :");
 
         const pawns = ['a','b','c','d','e','f','g','h'];
         pawns.forEach(pawn => {
@@ -210,15 +210,15 @@ d3.csv("../../data/games.csv").then(function(data) {
             .attr("text-anchor", "middle")
             .attr("font-size", "11px")
             .attr("fill", "#6c757d")
-            .text(`${filtered.length} mouvements • ${Object.keys(counts).length} trajectoires uniques`);
+            .text(`${filtered.length} movements • ${Object.keys(counts).length} uniques trajectories`);
     }
 
     function getTitleText() {
         if (currentPawn && currentFilter === 'p') {
-            return "Trajectoires du pion " + currentPawn.toUpperCase();
+            return "Pawn trajectory " + currentPawn.toUpperCase();
         }
-        const map = {'p': 'Pions', 'n': 'Cavaliers', 'b': 'Fous', 'r': 'Tours', 'q': 'Dame', 'k': 'Roi'};
-        return "Trajectoires des " + map[currentFilter];
+        const map = {'p': 'Pawns', 'n': 'Knights', 'b': 'Bishops', 'r': 'Rooks', 'q': 'Queen', 'k': 'King'};
+        return "trajectory of the " + map[currentFilter];
     }
 
     function createSimpleBoard() {
