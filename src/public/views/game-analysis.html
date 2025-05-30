@@ -1,21 +1,28 @@
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Game Analysis | Chess Insights</title>
-
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/favicon/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/svg+xml" href="images/favicon/favicon.svg">
+    <link rel="shortcut icon" href="images/favicon/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-touch-icon.png">
+    <link rel="manifest" href="images/favicon/site.webmanifest">
+    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <!-- CSS -->
     <link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700&display=swap" rel="stylesheet">
     <link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../styles/style.css">
-
+    <link rel="stylesheet" href="./styles/style.css">
+    <!-- JS -->
     <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/plotly.js-dist@2.24.1/plotly.min.js"></script>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chess.js@1.0.0-beta.1/dist/chess.min.js"></script>
-
 </head>
 <body>
     <!-- Header Nav -->
@@ -65,15 +72,8 @@
         </div>
     </nav>
 
-
-  <!-- CONTENT -->
-  <main class="py-16 px-4">
-    <section class="content">
-      <h1 class="hero-title">Welcome to Game Analysis</h1>
-      <p class="hero-subtitle">
-        Analyze your games, explore openings, and improve your chess skills with our comprehensive suite of tools.
-      </p>
-    </section>
+    <!-- CONTENT -->
+    <main class="py-16 px-4">
 
     <!-- Player Stats Section -->
     <section id="player-stats" class="py-16 px-6 bg-gray-50">
@@ -116,7 +116,7 @@
     <section id="heatmap" class="py-16 px-4">
         <div class="container mx-auto">
             <div class="text-center mb-12">
-            <h2 class="text-3xl font-bold mb-6">Heatmap des mouvements sur l'échiquier</h2>
+            <h2 class="text-3xl font-bold mb-6">Heatmap of chessboard movements</h2>
             </div>
 
             <!-- Filtres -->
@@ -124,36 +124,36 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <!-- Pièce sélectionnée -->
                 <div>
-                <label class="block text-sm font-medium text-gray-700 mb-2">Pièce</label>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Piece</label>
                 <select id="piece-filter" class="w-full p-2 border rounded">
-                    <option value="all">Toutes</option>
-                    <option value="p">Pion</option>
-                    <option value="n">Cavalier</option>
-                    <option value="b">Fou</option>
-                    <option value="r">Tour</option>
-                    <option value="q">Dame</option>
-                    <option value="k">Roi</option>
+                    <option value="all">All</option>
+                    <option value="p">Pawn</option>
+                    <option value="n">Knight</option>
+                    <option value="b">Bishop</option>
+                    <option value="r">Rook</option>
+                    <option value="q">Queen</option>
+                    <option value="k">King</option>
                 </select>
                 </div>
 
                 <!-- Couleur -->
                 <div>
-                <label class="block text-sm font-medium text-gray-700 mb-2">Couleur</label>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Color</label>
                 <select id="color-filter" class="w-full p-2 border rounded">
-                    <option value="all">Toutes</option>
-                    <option value="w">Blancs</option>
-                    <option value="b">Noirs</option>
+                    <option value="all">All</option>
+                    <option value="w">Whites</option>
+                    <option value="b">Blacks</option>
                 </select>
                 </div>
 
                 <!-- Type de visualisation -->
                 <div>
-                <label class="block text-sm font-medium text-gray-700 mb-2">Type de visualisation</label>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Type of visualization</label>
                 <select id="heatmap-type" class="w-full p-2 border rounded">
-                    <option value="movements">Mouvements</option>
+                    <option value="movements">Movements</option>
                     <option value="captures">Captures</option>
-                    <option value="checks">Mises en échec</option>
-                    <option value="openings">Ouvertures</option>
+                    <option value="checks">Checks</option>
+                    <option value="openings">Openings</option>
                 </select>
                 </div>
             </div>
@@ -163,7 +163,7 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <!-- Heatmap -->
             <div class="bg-white rounded-lg shadow-md p-6">
-                <h3 class="text-xl font-semibold mb-4">Heatmap des pièces</h3>
+                <h3 class="text-xl font-semibold mb-4">Heatmap of pieces</h3>
                 <div id="heatmap-container" class="w-full aspect-square max-w-md mx-auto"></div>
             </div>
 
@@ -173,20 +173,20 @@
                 <h3 class="text-xl font-semibold mb-4">Insights de la heatmap</h3>
                 <div class="space-y-4">
                     <div id="heatmap-stats">
-                    <p class="font-medium">Points chauds principaux :</p>
+                    <p class="font-medium">Main hot spots :</p>
                     <ul class="list-disc pl-5 mt-2 text-gray-700">
-                        <li>Centre de l'échiquier (d4, e4, d5, e5)</li>
-                        <li>Diagonale a1-h8 pour les fous</li>
-                        <li>Colonnes ouvertes pour les tours</li>
-                        <li>Cases c3, c6, f3, f6 pour les cavaliers</li>
+                        <li>Center of the chessboard (d4, e4, d5, e5)</li>
+                        <li>Diagonal a1-h8 for bishops</li>
+                        <li>Open columns for rooks</li>
+                        <li>Boxes c3, c6, f3, f6 for knights</li>
                     </ul>
                     </div>
                     <div>
                     <p class="font-medium">Analyse :</p>
                     <p class="mt-2 text-gray-700">
-                        La visualisation montre clairement l'importance du contrôle du centre dans les parties d'échecs.
-                        On observe également que les pièces blanches ont tendance à occuper plus fréquemment la moitié inférieure
-                        de l'échiquier, tandis que les pièces noires sont plus présentes dans la moitié supérieure.
+                        The visualization clearly shows the importance of controlling the center in chess games.
+                        We can also see that white pieces tend to occupy the lower half of the chessboard more frequently
+                        of the chessboard, while black pieces are more present in the upper half.
                     </p>
                     </div>
                 </div>
@@ -199,72 +199,79 @@
 
     <section id="trajectories" class="py-16 px-4 bg-gray-100">
         <div class="container mx-auto">
-            <!-- Titre et introduction -->
+            <!-- Title and introduction -->
             <div class="text-center mb-10">
-            <h2 class="text-3xl font-bold text-gray-800">Trajectoires des pièces</h2>
+            <h2 class="text-3xl font-bold text-gray-800">Piece Trajectories</h2>
             <p class="text-gray-600 mt-2 max-w-2xl mx-auto">
-                Explorez les trajectoires typiques de chaque pièce à travers 400 parties d'échecs réelles. Utilisez les filtres pour sélectionner un type de pièce ou un pion en particulier.
+                Explore typical trajectories of each chess piece across 400 real games. Use the filters to select a specific type of piece or pawn.
             </p>
             </div>
 
-            <!-- Conteneur principal (contrôles + SVG insérés dynamiquement) -->
+            <!-- Main container (controls + dynamically inserted SVG) -->
             <div id="piece-trajectories" class="bg-white rounded-lg shadow p-6 w-full max-w-4xl mx-auto">
-            <!-- Le JS insèrera ici les boutons de filtre et le SVG -->
+            <!-- JS will insert filter buttons and SVG here -->
             </div>
 
-            <!-- Légende -->
+            <!-- Legend -->
             <div class="mt-10 bg-white rounded-lg shadow p-6 max-w-4xl mx-auto">
-            <h4 class="text-lg font-semibold text-gray-800 mb-4">Comment lire cette visualisation :</h4>
+            <h4 class="text-lg font-semibold text-gray-800 mb-4">How to read this visualization:</h4>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-gray-600">
                 <div>
-                <p class="mb-2"><strong>Couleur :</strong> chaque type de pièce est représenté par une couleur spécifique (ex. rouge = pions, bleu = cavaliers).</p>
-                <p class="mb-2"><strong>Filtrage :</strong> utilisez les boutons en haut pour afficher uniquement les trajectoires d’une pièce donnée.</p>
+                <p class="mb-2"><strong>Color:</strong> each piece type is represented by a specific color (e.g., red = pawns, blue = knights).</p>
+                <p class="mb-2"><strong>Filtering:</strong> use the buttons above to display only the trajectories of a selected piece.</p>
                 </div>
                 <div>
-                <p class="mb-2"><strong>Courbes :</strong> chaque trait relie une case de départ à une case d’arrivée fréquente dans les parties.</p>
-                <p class="mb-2"><strong>Épaisseur / opacité :</strong> plus une trajectoire est fréquente, plus elle est visible.</p>
+                <p class="mb-2"><strong>Curves:</strong> each path connects a frequent start square to an end square in real games.</p>
+                <p class="mb-2"><strong>Thickness / opacity:</strong> the more frequent a trajectory, the more visible it is.</p>
                 </div>
             </div>
             </div>
         </div>
     </section>
 
-    <section id="analysis" class="p-8 bg-white rounded-xl shadow-md max-w-6xl mx-auto">
-        <h2 class="text-3xl font-bold mb-8 text-center">Analyse temporelle</h2>
 
-        <!-- Graphique : Évaluation et temps par coup -->
-        <div id="eval-time-chart" class="chart-container mb-4">
-            <h3 class="text-xl font-semibold mb-4 text-center">Évaluation de l'ordinateur et temps par coup</h3>
-            <!-- Injecté par analysis-time.js (via Plotly) -->
+    <section id="analysis" class="p-8 bg-white rounded-xl shadow-md max-w-6xl mx-auto">
+        <h2 class="text-3xl font-bold mb-8 text-center text-gray-800">Temporal Analysis</h2>
+        
+        <!-- Main chart -->
+        <div id="chart" class="chart-container mb-6 bg-gray-50 p-6 rounded-lg border border-gray-200">
+            <h3 class="text-xl font-semibold mb-4 text-center text-gray-700">
+            </h3>
+            <!-- D3.js chart will be injected here -->
+        </div>
+        
+        <!-- Quick statistics -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+            <div class="bg-gray-50 p-4 rounded-lg text-center border border-gray-200">
+                <div id="beginner-time" class="text-2xl font-bold text-gray-800">-</div>
+                <div class="text-sm text-gray-600">Beginners</div>
+            </div>
+            <div class="bg-gray-50 p-4 rounded-lg text-center border border-gray-200">
+                <div id="intermediate-time" class="text-2xl font-bold text-gray-800">-</div>
+                <div class="text-sm text-gray-600">Intermediate</div>
+            </div>
+            <div class="bg-gray-50 p-4 rounded-lg text-center border border-gray-200">
+                <div id="expert-time" class="text-2xl font-bold text-gray-800">-</div>
+                <div class="text-sm text-gray-600">Experts</div>
+            </div>
+        </div>
+        
+        <!-- Simple analysis -->
+        <div class="mt-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
+            <h4 class="font-semibold text-gray-800 mb-2">Analysis:</h4>
+            <p class="text-sm text-gray-700">
+                This chart shows how thinking time varies throughout a chess game across different skill levels.
+                The three colored lines represent beginners, intermediate players, and experts,
+                with the x-axis showing move numbers and background zones indicating opening, middlegame, and endgame phases.
+            </p>
+        </div>
+        
+        <!-- Loading state -->
+        <div id="loading" class="text-center p-8 text-gray-500">
+            <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500 mb-2"></div>
+            <p>Analyzing game phases...</p>
         </div>
     </section>
-
-  <!-- JS -->
-  <script>
-    function toggleMobileMenu() {
-      const menu = document.getElementById('mobileMenu');
-      menu.classList.toggle('show');
-    }
-
-    document.addEventListener('click', function(event) {
-      const menu = document.getElementById('mobileMenu');
-      const button = document.querySelector('.mobile-menu-button');
-      if (!menu.contains(event.target) && !button.contains(event.target)) {
-        menu.classList.remove('show');
-      }
-    });
-  </script>
-
-    <!-- Inclure les bibliothèques si ce n'est pas déjà fait -->
-    <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
-    <script src="https://cdn.jsdelivr.net/npm/plotly.js-dist@2.24.1"></script>
-
-    <script src="../scripts/heat-map.js"></script>
-    <script src="../scripts/piece-trajectories.js"></script>
-    <script src="../scripts/analysis-elo.js"></script>
-    <script src="../scripts/analysis-time.js"></script>
-    <script src="../scripts/analysis-victory.js"></script>
-    <script src="../scripts/player-stats.js"></script>
 
     <!-- Footer -->
     <footer class="py-12 px-4 bg-white text-black">
@@ -302,5 +309,31 @@
             </div>
         </div>
     </footer>
+
+    <!-- JS -->
+    <script>
+        function toggleMobileMenu() {
+        const menu = document.getElementById('mobileMenu');
+        menu.classList.toggle('show');
+        }
+
+        document.addEventListener('click', function(event) {
+        const menu = document.getElementById('mobileMenu');
+        const button = document.querySelector('.mobile-menu-button');
+        if (!menu.contains(event.target) && !button.contains(event.target)) {
+            menu.classList.remove('show');
+        }
+        });
+    </script>
+    <!-- Inclure les bibliothèques si ce n'est pas déjà fait -->
+    <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+    <script src="https://cdn.jsdelivr.net/npm/plotly.js-dist@2.24.1"></script>
+
+    <script src="../scripts/heat-map.js"></script>
+    <script src="../scripts/piece-trajectories.js"></script>
+    <script src="../scripts/analysis-elo.js"></script>
+    <script src="../scripts/analysis-time.js"></script>
+    <script src="../scripts/analysis-victory.js"></script>
+    <script src="../scripts/player-stats.js"></script>
 </body>
 </html>
