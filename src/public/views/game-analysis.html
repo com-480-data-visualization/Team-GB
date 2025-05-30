@@ -83,188 +83,39 @@
       </p>
     </section>
 
-    <!-- Analyze Section -->
-    <section id="analyze" class="py-16 px-4 bg-gray-100">
-        <div class="container mx-auto">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold mb-4">Interactive Game Analysis</h2>
-                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
-                    Replay and analyze chess games with our interactive board
-                </p>
-            </div>
-            
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <!-- Game selector -->
-                <div class="bg-white rounded-lg shadow-md p-6">
-                    <h3 class="text-xl font-semibold mb-4">Select Game</h3>
-                    <div class="mb-4">
-                        <label for="game-search" class="block text-gray-700 mb-2">Search by players or opening:</label>
-                        <input type="text" id="game-search" placeholder="e.g., Carlsen, Sicilian" 
-                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                    </div>
-                    <div class="mb-4">
-                        <label for="game-filter" class="block text-gray-700 mb-2">Filter by:</label>
-                        <select id="game-filter" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                            <option value="all">All Games</option>
-                            <option value="white-win">White Wins</option>
-                            <option value="black-win">Black Wins</option>
-                            <option value="draw">Draws</option>
-                        </select>
-                    </div>
-
-                    <section id="data-verification" class="py-8 px-4 bg-blue-50">
-                        <div class="container mx-auto">
-                            <h2 class="text-2xl font-bold mb-4">🔍 Vérification des données</h2>
-                            <div id="data-check-results" class="bg-white rounded-lg shadow-md p-6">
-                                <p class="text-gray-600">Chargement en cours...</p>
-                            </div>
-                        </div>
-                    </section>
-
-                    <div id="game-list" class="mt-6 max-h-64 overflow-y-auto">
-                        <!-- @TOODO add the game list -->
-                    </div>
-                </div>
-                
-                <!-- Interactive chessboard -->
-                <div class="bg-white rounded-lg shadow-md p-6 lg:col-span-2">
-                    <h3 class="text-xl font-semibold mb-4">Game Replay</h3>
-                    <div id="chess-board" class="w-full mb-4 aspect-square max-w-md mx-auto"></div>
-                    <div class="flex justify-center space-x-4 my-4">
-                        <button id="btn-start" class="board-control-btn">
-                            <i class="fas fa-fast-backward"></i>
-                        </button>
-                        <button id="btn-prev" class="board-control-btn">
-                            <i class="fas fa-step-backward"></i>
-                        </button>
-                        <button id="btn-play" class="board-control-btn">
-                            <i class="fas fa-play"></i>
-                        </button>
-                        <button id="btn-next" class="board-control-btn">
-                            <i class="fas fa-step-forward"></i>
-                        </button>
-                        <button id="btn-end" class="board-control-btn">
-                            <i class="fas fa-fast-forward"></i>
-                        </button>
-                    </div>
-                    <div id="move-history" class="h-40 overflow-y-auto border border-gray-200 rounded p-3">
-                        <!-- @TOODO add the history of moves -->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Player Stats Section -->
-
     <section id="player-stats" class="py-16 px-6 bg-gray-50">
         <div class="max-w-6xl mx-auto">
             <!-- Titre -->
             <div class="text-center mb-12">
-            <h2 class="text-4xl font-extrabold text-gray-900">🎯 Player Statistics</h2>
+            <h2 class="text-4xl font-extrabold text-gray-900">Player Statistics</h2>
             <p class="text-gray-600 text-lg mt-2">
                 Visualize key metrics and performance of any player on the platform.
             </p>
             </div>
-
-            <!-- Formulaire de recherche -->
-            <div class="bg-white rounded-xl shadow-lg p-6 mb-6 flex flex-col md:flex-row items-center gap-4">
-            <input type="text" id="player-search" placeholder="Enter Lichess ID"
-                class="flex-grow px-4 py-3 border border-gray-300 rounded-lg text-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" />
-            <button id="search-button"
-                class="bg-green-600 text-white px-6 py-3 rounded-lg text-lg hover:bg-green-700 transition duration-200">
-                Search
-            </button>
-            </div>
-
-            <!-- Résultats (9 éléments en 3 colonnes sur desktop) -->
-            <div id="player-results" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
-        </div>
-    </section>
-
-    <!-- Opening Explorer Section -->
-    <section id="opening-explorer" class="py-16 px-4">
-        <div class="container mx-auto">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold mb-4">Opening Explorer</h2>
-                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
-                    In this section we will discover popular chess openings and analyze their effectiveness
-                </p>
+            
+            <div class="flex gap-8">
+            <!-- Panneau de recherche à gauche -->
+            <div class="w-80 flex-shrink-0">
+                <!-- Étiquette stylisée remplace tout le panneau blanc -->
+            <div class="chess-tag sticky top-6">
+                <h3>Chess Player Finder</h3>
+                <label>Player Identification</label>
+                <input 
+                    type="text" 
+                    id="player-search" 
+                    placeholder="Enter Lichess username..."
+                    value="daniel_likes_chess"
+                />
+                <p class="text-xs italic text-gray-400 mb-3">For example: <span class="underline">daniel_likes_chess</span></p>
+                <button id="search-button">Search Player</button>
+                </div>
             </div>
             
-            <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
-                <!-- Opening categories -->
-                <div class="bg-white rounded-lg shadow-md p-6 lg:col-span-2">
-                    <h3 class="text-xl font-semibold mb-4">Opening Categories</h3>
-                    <div class="space-y-2">
-                        <div class="opening-category">
-                            <h4 class="font-medium">E - Indian Defenses</h4>
-                            <div class="pl-4 mt-2 opening-list">
-                                <div class="opening-item">King's Indian Defense</div>
-                                <div class="opening-item">Nimzo-Indian Defense</div>
-                                <div class="opening-item">Queen's Indian Defense</div>
-                            </div>
-                        </div>
-                        <div class="opening-category">
-                            <h4 class="font-medium">C - Open Games</h4>
-                            <div class="pl-4 mt-2 opening-list">
-                                <div class="opening-item">Ruy Lopez</div>
-                                <div class="opening-item">Italian Game</div>
-                                <div class="opening-item">Scotch Game</div>
-                            </div>
-                        </div>
-                        <div class="opening-category">
-                            <h4 class="font-medium">B - Semi-Open Games</h4>
-                            <div class="pl-4 mt-2 opening-list">
-                                <div class="opening-item">Sicilian Defense</div>
-                                <div class="opening-item">French Defense</div>
-                                <div class="opening-item">Caro-Kann Defense</div>
-                            </div>
-                        </div>
-                        <!-- @TODO: add more opening categories -->
-                    </div>
-                </div>
-                
-                <!-- Opening visualization -->
-                <div class="bg-white rounded-lg shadow-md p-6 lg:col-span-3">
-                    <h3 class="text-xl font-semibold mb-4">Opening Analysis</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <div id="opening-board" class="w-full aspect-square max-w-xs mx-auto mb-4"></div>
-                            <div id="opening-moves" class="text-gray-700 mt-2">
-                                <p>1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4</p>
-                            </div>
-                        </div>
-                        <div>
-                            <h4 class="font-medium mb-3">Sicilian Defense: Najdorf Variation</h4>
-                            <div id="opening-stats" class="space-y-4">
-                                <div>
-                                    <p class="text-sm text-gray-600">Win rate:</p>
-                                    <div class="flex items-center mt-1">
-                                        <div class="h-5 bg-white w-1/4 border-r border-gray-300"></div>
-                                        <div class="h-5 bg-gray-300 w-1/4"></div>
-                                        <div class="h-5 bg-black w-1/2"></div>
-                                    </div>
-                                    <div class="flex justify-between text-sm mt-1">
-                                        <span>White: 25%</span>
-                                        <span>Draw: 25%</span>
-                                        <span>Black: 50%</span>
-                                    </div>
-                                </div>
-                                <div>
-                                    <p class="text-sm text-gray-600">Popularity by rating:</p>
-                                    <div id="opening-rating-chart" class="h-40 mt-2"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mt-6">
-                        <h4 class="font-medium mb-3">Common Variations</h4>
-                        <div id="variations-list" class="space-y-2">
-                            <!-- @TODO: Add the variations here -->
-                        </div>
-                    </div>
-                </div>
+            <!-- Résultats à droite -->
+            <div class="flex-1">
+                <div id="player-results"></div>
+            </div>
             </div>
         </div>
     </section>
@@ -325,7 +176,7 @@
             </div>
 
             <!-- Insights + Ouvertures -->
-            <div class="bg-white rounded-lg shadow-md p-6 space-y-6">
+            <div class="bg-white rounded-lg shadow-md p-8 space-y-6 flex flex-col justify-center max-w-xl mx-auto">
                 <div>
                 <h3 class="text-xl font-semibold mb-4">Insights de la heatmap</h3>
                 <div class="space-y-4">
@@ -346,23 +197,9 @@
                         de l'échiquier, tandis que les pièces noires sont plus présentes dans la moitié supérieure.
                     </p>
                     </div>
-                    <div>
-                    <p class="font-medium">Comparaison par niveau :</p>
-                    <div id="heatmap-rating-comparison" class="h-40 mt-2">
-                        <!-- graphique à venir -->
-                    </div>
-                    </div>
                 </div>
                 </div>
 
-                <!-- Résumé des ouvertures -->
-                <div>
-                <h3 class="text-xl font-semibold mb-4">Ouvertures populaires</h3>
-                <p class="text-gray-700 mb-2">Top des premiers coups analysés dans la base de parties :</p>
-                <ul id="top-openings" class="list-disc pl-5 text-gray-700">
-                    <!-- rempli dynamiquement via JS -->
-                </ul>
-                </div>
             </div>
             </div>
         </div>
@@ -401,84 +238,14 @@
     </section>
 
     <section id="analysis" class="p-8 bg-white rounded-xl shadow-md max-w-6xl mx-auto">
-        <h2 class="text-3xl font-bold mb-8 text-center">Analyse des parties</h2>
-        
-        <!-- Graphique 1 : Distribution des Elo -->
-        <div id="modern-results" class="chart-container mb-16">
-            <h3 class="text-xl font-semibold mb-4 text-center">Distribution des niveaux Elo des joueurs</h3>
-            
-            <!-- Canvas pour le graphique -->
-            <div class="bg-gray-50 rounded-lg p-6 mb-6">
-                <canvas id="winRateChart" class="w-full h-80"></canvas>
-            </div>
-            
-            <!-- Statistiques -->
-            <div id="statsContainer" class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
-                <!-- Stats injectées automatiquement par analysis-elo.js -->
-            </div>
-            
-            <!-- Insight -->
-            <div class="bg-blue-50 border-l-4 border-blue-400 p-4 rounded-r-lg">
-                <p class="text-blue-800">
-                    <span class="font-semibold">💡 Insight :</span> 
-                    La distribution des Elo révèle le niveau général de votre communauté.
-                    Analysez où se concentrent vos joueurs !
-                </p>
-            </div>
-        </div>
-        
-        <!-- Graphique 2 : Répartition des méthodes de victoire -->
-        <div id="trend-analysis" class="chart-container mb-16">
-            <h3 class="text-xl font-semibold mb-4 text-center">Méthodes de victoire dans les parties</h3>
-            <!-- Injecté par analysis-victory.js -->
-        </div>
-        
-        <!-- Graphique 3 : Évaluation et temps par coup -->
+        <h2 class="text-3xl font-bold mb-8 text-center">Analyse temporelle</h2>
+
+        <!-- Graphique : Évaluation et temps par coup -->
         <div id="eval-time-chart" class="chart-container mb-4">
             <h3 class="text-xl font-semibold mb-4 text-center">Évaluation de l'ordinateur et temps par coup</h3>
-            <!-- Injecté par analysis-time.js (avec Plotly) -->
+            <!-- Injecté par analysis-time.js (via Plotly) -->
         </div>
     </section>
-
-        <!-- Dashboard Section -->
-    <section id="dashboard" class="py-16 px-4 bg-gray-100">
-        <div class="container mx-auto">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold mb-4">Interactive Dashboard</h2>
-                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
-                    Explore key insights from our dataset of 20,000+ chess games from Lichess.org
-                </p>
-            </div>
-            <!-- Stats Cards -->
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <div class="bg-white rounded-lg shadow-md p-6">
-                    <h3 class="text-xl font-semibold mb-4">Game Statistics</h3>
-                    <div id="game-stats-chart" class="h-64"></div>
-                    <p class="text-gray-600 mt-4">Distribution of games by result and time control</p>
-                </div>
-                <div class="bg-white rounded-lg shadow-md p-6">
-                    <h3 class="text-xl font-semibold mb-4">Opening Popularity</h3>
-                    <div id="opening-chart" class="h-64"></div>
-                    <p class="text-gray-600 mt-4">Most popular chess openings across all games</p>
-                </div>
-                <div class="bg-white rounded-lg shadow-md p-6">
-                    <h3 class="text-xl font-semibold mb-4">Rating Distribution</h3>
-                    <div id="rating-distribution" class="h-64"></div>
-                    <p class="text-gray-600 mt-4">Player ratings distribution across all games</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="blunder-report" class="content">
-      <h2 class="text-3xl font-bold mb-4">Blunder Report</h2>
-      <p class="text-gray-600 max-w-3xl mx-auto">
-        Identify key mistakes and missed opportunities in a game. Understand where the game shifted.
-      </p>
-    </section>
-
-    <div id="games-table" class="overflow-x-auto my-12 px-4"></div>
-  </main>
 
   <!-- JS -->
   <script>
