@@ -3,8 +3,8 @@ d3.csv("../../data/games.csv").then(data => {
     if (checkDiv) {
         let checkHTML = '<h3 class="text-lg font-semibold mb-3">Résultats de vérification :</h3>';
         checkHTML += data.length === 0
-            ? '<div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">❌ Aucune donnée trouvée dans le fichier CSV</div>'
-            : `<div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">✅ ${data.length} parties chargées avec succès</div>`;
+            ? '<div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">❌ Aucune donnée trouvée</div>'
+            : `<div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">✅ ${data.length} parties chargées</div>`;
         checkDiv.innerHTML = checkHTML;
     }
 
@@ -12,111 +12,118 @@ d3.csv("../../data/games.csv").then(data => {
     const ranks = ['1', '2', '3', '4', '5', '6', '7', '8'];
 
     function extractSquare(move) {
-        // Nettoyer le coup des symboles d'échec/mat
-        const cleanMove = move.replace(/[+#]/g, '');
-        
-        // Pour les captures, chercher la case de destination après 'x'
-        if (cleanMove.includes('x')) {
-            const match = cleanMove.match(/x([a-h][1-8])/);
+        const clean = move.replace(/[+#]/g, '');
+        if (clean.includes('x')) {
+            const match = clean.match(/x([a-h][1-8])/);
             return match ? match[1] : null;
         }
-        
-        // Pour les coups normaux, dernière case mentionnée
-        const match = cleanMove.match(/([a-h][1-8])/g);
+        const match = clean.match(/([a-h][1-8])/g);
         return match ? match[match.length - 1] : null;
     }
 
     function extractPiece(move) {
-        // Nettoyer le coup
-        const cleanMove = move.replace(/[+#x]/g, '');
-        
-        // Roques
         if (move.includes('O-O')) return 'k';
-        
-        // Pièce explicite au début
-        const pieceMatch = move.match(/^([KQRBN])/);
-        if (pieceMatch) return pieceMatch[1].toLowerCase();
-        
-        // Sinon c'est un pion
-        return 'p';
+        const m = move.match(/^([KQRBN])/);
+        return m ? m[1].toLowerCase() : 'p';
     }
 
     function isCapture(move) {
         return move.includes('x');
     }
 
-    function isCheckOrMate(move) {
+    function isCheck(move) {
         return move.includes('+') || move.includes('#');
     }
 
     function generateHeatmap(pieceType, color, type) {
-        const squareFreq = {};
-        files.forEach(f => ranks.forEach(r => squareFreq[f + r] = 0));
+        const freq = {};
+        files.forEach(f => ranks.forEach(r => freq[f + r] = 0));
 
         data.forEach(row => {
             const moves = row.moves?.split(" ") || [];
 
             moves.forEach((move, idx) => {
-                // Ignorer les numéros de coups et les résultats
                 if (/^\d+\./.test(move) || /^(1-0|0-1|1\/2-1\/2|\*)$/.test(move)) return;
-                
+
                 const moveColor = idx % 2 === 0 ? 'w' : 'b';
-                if (color !== 'all' && color !== moveColor) return;
+                if (color !== 'all' && moveColor !== color) return;
+
+                // LOGIQUE SPÉCIFIQUE POUR LES OUVERTURES
+                if (type === "openings") {
+                    // Limiter aux 10 premiers coups (20 demi-coups)
+                    if (idx >= 20) return;
+                    
+                    const piece = extractPiece(move);
+                    
+                    // Filtrer les pièces pertinentes pour les ouvertures
+                    if (pieceType === 'all') {
+                        // Pour "toutes les pièces", exclure le roi (sauf roques) et la dame au début
+                        if (piece === 'k' && !move.includes('O-O')) return; // Pas de coups de roi sauf roques
+                        if (piece === 'q' && idx < 6) return; // Pas de dame trop tôt
+                    } else {
+                        // Si une pièce spécifique est sélectionnée, la respecter
+                        if (piece !== pieceType) return;
+                    }
+                    
+                    // Suggestions supplémentaires pour les ouvertures
+                    // Exclure les coups très tardifs de développement
+                    if (idx > 14 && (piece === 'n' || piece === 'b')) return;
+                }
+                // LOGIQUE POUR LES AUTRES TYPES
+                else {
+                    if (type === "captures" && !isCapture(move)) return;
+                    if (type === "checks" && !isCheck(move)) return;
+                }
 
                 const piece = extractPiece(move);
                 const square = extractSquare(move);
-                
-                // Vérifier que la case est valide
-                if (!square || !squareFreq.hasOwnProperty(square)) return;
-                if (pieceType !== 'all' && piece !== pieceType) return;
+                if (!square || !freq.hasOwnProperty(square)) return;
 
-                // Filtrer par type de mouvement
-                if (type === 'captures' && !isCapture(move)) return;
-                if (type === 'checks' && !isCheckOrMate(move)) return;
-                // type === 'movements' inclut tous les coups
+                // Pour les types autres que "openings", appliquer le filtre de pièce normalement
+                if (type !== "openings" && pieceType !== 'all' && piece !== pieceType) return;
 
-                squareFreq[square]++;
+                freq[square]++;
             });
         });
 
-        const maxFreq = d3.max(Object.values(squareFreq));
-        const normalizedData = Object.entries(squareFreq).map(([square, count]) => ({
-            file: square[0],
-            rank: square[1],
-            frequency: maxFreq > 0 ? count / maxFreq : 0
+        const max = d3.max(Object.values(freq));
+        const heatmapData = Object.entries(freq).map(([sq, count]) => ({
+            file: sq[0],
+            rank: sq[1],
+            value: max > 0 ? count / max : 0
         }));
 
-        drawHeatmap(normalizedData);
+        drawHeatmap(heatmapData);
     }
 
-    function drawHeatmap(normalizedData) {
+    function drawHeatmap(data) {
         const container = d3.select("#heatmap-container");
         container.selectAll("*").remove();
 
         const width = container.node().clientWidth;
-        const squareSize = width / 8;
+        const size = width / 8;
+
         const svg = container.append("svg")
             .attr("width", width)
             .attr("height", width);
 
-        const colorScale = d3.scaleSequential(d3.interpolateYlOrRd).domain([0, 1]);
+        const scale = d3.scaleSequential(d3.interpolateYlOrRd).domain([0, 1]);
 
-        normalizedData.forEach(d => {
-            const x = files.indexOf(d.file) * squareSize;
-            const y = (8 - +d.rank) * squareSize;
-
+        data.forEach(d => {
+            const x = files.indexOf(d.file) * size;
+            const y = (8 - +d.rank) * size;
             svg.append("rect")
                 .attr("x", x)
                 .attr("y", y)
-                .attr("width", squareSize)
-                .attr("height", squareSize)
-                .attr("fill", colorScale(d.frequency))
+                .attr("width", size)
+                .attr("height", size)
+                .attr("fill", scale(d.value))
                 .attr("stroke", "#333")
                 .attr("stroke-width", 0.5);
         });
     }
 
-    // Initialisation des sélecteurs
+    // Sélecteurs
     const pieceSelector = document.getElementById("piece-filter");
     const colorSelector = document.getElementById("color-filter");
     const typeSelector = document.getElementById("heatmap-type");
@@ -132,17 +139,11 @@ d3.csv("../../data/games.csv").then(data => {
     colorSelector?.addEventListener("change", updateHeatmap);
     typeSelector?.addEventListener("change", updateHeatmap);
 
-    updateHeatmap(); // affichage initial
+    updateHeatmap();
 
 }).catch(error => {
-    console.error('Erreur lors du chargement du CSV:', error);
     const checkDiv = document.getElementById('data-check-results');
     if (checkDiv) {
-        checkDiv.innerHTML = `
-            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
-                ❌ Erreur lors du chargement : ${error.message}
-                <br><small>Vérifiez que le fichier games.csv existe et est accessible</small>
-            </div>
-        `;
+        checkDiv.innerHTML = `<div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">❌ Erreur CSV: ${error.message}</div>`;
     }
 });
