@@ -14,7 +14,7 @@ function getGameLevel(whiteRating, blackRating) {
     return getPlayerLevel(avgRating);
 }
 
-d3.csv("../../data/games.csv").then(data => {
+d3.csv("./data/games.csv").then(data => {
     console.log("Données chargées:", data.length, "parties");
 
     // Analyser les coups individuels
