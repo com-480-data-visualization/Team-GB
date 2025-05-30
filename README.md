@@ -64,9 +64,3 @@ npm install
 
 # 4. Start the server
 npm start
-
-
-
-
-
-
