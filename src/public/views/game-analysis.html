@@ -109,6 +109,16 @@
                             <option value="draw">Draws</option>
                         </select>
                     </div>
+
+                    <section id="data-verification" class="py-8 px-4 bg-blue-50">
+                        <div class="container mx-auto">
+                            <h2 class="text-2xl font-bold mb-4">🔍 Vérification des données</h2>
+                            <div id="data-check-results" class="bg-white rounded-lg shadow-md p-6">
+                                <p class="text-gray-600">Chargement en cours...</p>
+                            </div>
+                        </div>
+                    </section>
+
                     <div id="game-list" class="mt-6 max-h-64 overflow-y-auto">
                         <!-- @TOODO add the game list -->
                     </div>
@@ -311,49 +321,86 @@
     <section id="heatmap" class="py-16 px-4">
         <div class="container mx-auto">
             <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold mb-4">Chess Board Heatmaps</h2>
-                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
-                    Visualize piece movements and hotspots on the chess board
-                </p>
+            <h2 class="text-3xl font-bold mb-6">Heatmap des mouvements sur l'échiquier</h2>
             </div>
-            
+
+            <div class="filter-container mb-12">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <!-- Pièce sélectionnée -->
+                <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Pièce</label>
+                <select id="piece-filter" class="w-full p-2 border rounded">
+                    <option value="all">Toutes</option>
+                    <option value="p">Pion</option>
+                    <option value="n">Cavalier</option>
+                    <option value="b">Fou</option>
+                    <option value="r">Tour</option>
+                    <option value="q">Dame</option>
+                    <option value="k">Roi</option>
+                </select>
+                </div>
+
+                <!-- Couleur (non utilisé pour l'instant) -->
+                <!-- Couleur -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Couleur</label>
+                    <select id="color-filter" class="w-full p-2 border rounded">
+                        <option value="all">Toutes</option>
+                        <option value="w">Blancs</option>
+                        <option value="b">Noirs</option>
+                    </select>
+                </div>
+
+                <!-- Type de visualisation -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Type de visualisation</label>
+                    <select id="heatmap-type" class="w-full p-2 border rounded">
+                        <option value="movements">Mouvements</option>
+                        <option value="captures">Captures</option>
+                        <option value="checks">Mises en échec</option>
+                    </select>
+                </div>
+            </div>
+            </div>
+
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <div class="bg-white rounded-lg shadow-md p-6">
-                    <h3 class="text-xl font-semibold mb-4">Piece Movement Frequency</h3>
-                    <div class="space-y-4">
-                        <div class="flex flex-wrap gap-3 justify-center">
-                            <button class="piece-filter-btn active" data-piece="all">All Pieces</button>
-                            <button class="piece-filter-btn" data-piece="p">Pawns</button>
-                            <button class="piece-filter-btn" data-piece="n">Knights</button>
-                            <button class="piece-filter-btn" data-piece="b">Bishops</button>
-                            <button class="piece-filter-btn" data-piece="r">Rooks</button>
-                            <button class="piece-filter-btn" data-piece="q">Queens</button>
-                            <button class="piece-filter-btn" data-piece="k">Kings</button>
-                        </div>
-                        <div id="movement-heatmap" class="w-full aspect-square max-w-md mx-auto"></div>
+            <!-- Heatmap -->
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h3 class="text-xl font-semibold mb-4">Heatmap des pièces</h3>
+                <div id="heatmap-container" class="w-full aspect-square max-w-md mx-auto"></div>
+            </div>
+
+            <!-- Insights -->
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h3 class="text-xl font-semibold mb-4">Insights de la heatmap</h3>
+                <div class="space-y-4">
+                <div id="heatmap-stats">
+                    <p class="font-medium">Points chauds principaux :</p>
+                    <ul class="list-disc pl-5 mt-2">
+                    <li>Centre de l'échiquier (d4, e4, d5, e5)</li>
+                    <li>Diagonale a1-h8 pour les fous</li>
+                    <li>Colonnes ouvertes pour les tours</li>
+                    <li>Cases c3, c6, f3, f6 pour les cavaliers</li>
+                    </ul>
+                </div>
+                <div>
+                    <p class="font-medium">Analyse :</p>
+                    <p class="mt-2 text-gray-700">
+                    La visualisation montre clairement l'importance du contrôle du centre dans les parties d'échecs.
+                    On observe également que les pièces blanches ont tendance à occuper plus fréquemment la moitié inférieure
+                    de l'échiquier, tandis que les pièces noires sont plus présentes dans la moitié supérieure.
+                    </p>
+                </div>
+                <div>
+                    <p class="font-medium">Comparaison par niveau :</p>
+                    <div id="heatmap-rating-comparison" class="h-40 mt-2">
+                    <!-- future graph here -->
                     </div>
                 </div>
-                
-                <div class="bg-white rounded-lg shadow-md p-6">
-                    <h3 class="text-xl font-semibold mb-4">Piece Capture Locations</h3>
-                    <div class="space-y-4">
-                        <div class="flex justify-center gap-3">
-                            <button class="side-filter-btn active" data-side="all">All Captures</button>
-                            <button class="side-filter-btn" data-side="w">White Captures</button>
-                            <button class="side-filter-btn" data-side="b">Black Captures</button>
-                        </div>
-                        <div id="capture-heatmap" class="w-full aspect-square max-w-md mx-auto"></div>
-                    </div>
                 </div>
+            </div>
             </div>
         </div>
-    </section>
-
-    <section id="engine-analysis" class="content">
-      <h2 class="text-3xl font-bold mb-4">Engine Analysis</h2>
-      <p class="text-gray-600 max-w-3xl mx-auto">
-        Dive deeper into critical positions with engine evaluations and suggested alternatives.
-      </p>
     </section>
 
         <!-- Dashboard Section -->
@@ -416,50 +463,7 @@
     <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
     <script src="https://cdn.jsdelivr.net/npm/plotly.js-dist@2.24.1"></script>
 
-    <!-- Conteneur pour la visualisation -->
-
-    <script>
-    d3.csv("../data/games.csv").then(data => {
-    const container = d3.select("#games-table");
-
-    if (data.length === 0) {
-        container.append("p").text("Aucune donnée disponible.");
-        return;
-    }
-
-    const columns = [
-        "id", "rated", "created_at", "last_move_at", "turns",
-        "victory_status", "winner", "increment_code",
-        "white_id", "white_rating", "black_id", "black_rating",
-        "moves", "opening_eco", "opening_name", "opening_ply"
-    ];
-
-    const table = container.append("table")
-        .attr("class", "min-w-full border-collapse border border-gray-300");
-
-    const thead = table.append("thead");
-    thead.append("tr")
-        .selectAll("th")
-        .data(columns)
-        .enter()
-        .append("th")
-        .text(d => d)
-        .attr("class", "border border-gray-300 px-4 py-2 bg-gray-100 text-left text-sm font-semibold text-gray-700");
-
-    const tbody = table.append("tbody");
-    const rows = tbody.selectAll("tr")
-        .data(data.slice(0, 20)) // Seulement les 20 premières lignes pour commencer
-        .enter()
-        .append("tr");
-
-    rows.selectAll("td")
-        .data(row => columns.map(col => row[col]))
-        .enter()
-        .append("td")
-        .text(d => d)
-        .attr("class", "border border-gray-300 px-4 py-2 text-sm text-gray-600");
-    });
-    </script>
+    <script src="../scripts/heat-map.js"></script>
 
     <!-- Footer -->
     <footer class="py-12 px-4 bg-white text-black">
