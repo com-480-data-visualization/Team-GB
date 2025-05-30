@@ -47,6 +47,23 @@ However, for those interested in the implementation details, the complete codeba
 - `package.json` – Project dependencies and scripts  
 - `.gitignore`, `LICENSE`, `README.md`, `captain-definition`
 
+### Running the Website Locally (optional)
+
+To run the project locally for testing or development:
+
+```bash
+# 1. Clone the repository
+git clone https://github.com/your-username/your-repo-name.git
+cd your-repo-name
+
+# 2. Navigate to the source folder
+cd src
+
+# 3. Install dependencies (only once if never done)
+npm install
+
+# 4. Start the server
+npm start
 
 
 
